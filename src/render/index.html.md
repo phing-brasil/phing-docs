@@ -3,9 +3,9 @@ title: Página inicial
 layout: default
 ---
 
-1. Prefácio
-  1. Sobre essa documentação
-  2. Autores
+1. [Prefácio](capitulo1/prefacio.html)
+  1. [Sobre essa documentação](capitulo1/sobre-essa-documentacao.html)
+  2. [Autores](capitulo1/autores.html)
   3. Licensa
 2. Introdução
   1. O que é Phing

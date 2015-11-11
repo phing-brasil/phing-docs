@@ -226,6 +226,7 @@ a {
   border-top: solid 1px #eff0f1; }
 
 .site-footer-owner {
+  padding-top: 1.5em;
   display: block;
   font-weight: bold; }
 
