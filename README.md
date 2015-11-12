@@ -42,7 +42,7 @@ Para ter certeza de que tudo ocorreu bem vamos executar o docpad
 docpad run
 ```
 
-Após o docpad gerar os arquivos ele irá automaticamente criar um servidor local na porta 9778, para ter certeza que tudo está correto você deverá ver uma paǵina como essa http://phingofficial-brasil.github.io/phing-docs/ ao acessar no seu navegar a URL **http://localhost:9778**
+Após o docpad gerar os arquivos ele irá automaticamente criar um servidor local na porta 9778, para ter certeza que tudo está correto você deverá ver uma paǵina como essa http://phing-brasil.github.io/phing-docs/ ao acessar no seu navegar a URL **http://localhost:9778**
 
 ```
 firefox localhost:9778
