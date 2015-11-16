@@ -8,9 +8,9 @@ layout: default
   2. [Autores](capitulo1/autores.html)
   3. Licensa
 2. Introdução
-  1. O que é Phing
+  1. [O que é Phing](capitulo2/o-que-e-phing.html)
   2. A história: Phing e Binarycloud
-  3. Como Phing funciona ?
+  3. [Como Phing funciona ?](capitulo2/como-phing-funciona.html)
   4. Legal, mas como posso ajudar?
 3. Instalando o Phing
   1. Requerimentos do sistema
