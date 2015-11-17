@@ -13,8 +13,8 @@ layout: default
   3. [Como Phing funciona ?](capitulo2/como-phing-funciona.html)
   4. Legal, mas como posso ajudar?
 3. Instalando o Phing
-  1. Requerimentos do sistema
-  2. Obtendo o Phing
+  1. [Requerimentos do sistema](capitulo3/requerimentos-do-sistema.html)
+  2. [Obtendo o Phing](capitulo3/obtendo-o-phing.html)
   3. Instalando através do PEAR
   4. Alternativa de instalação
   5. Usando o Phing
