@@ -15,8 +15,8 @@ layout: default
 3. Instalando o Phing
   1. [Requerimentos do sistema](capitulo3/requerimentos-do-sistema.html)
   2. [Obtendo o Phing](capitulo3/obtendo-o-phing.html)
-  3. Instalando através do PEAR
-  4. Alternativa de instalação
+  3. [Instalando através do PEAR](capitulo3/instalando-atraves-do-pear.html)
+  4. [Alternativa de instalação](capitulo3/alternativa-de-instalacao.html)
   5. Usando o Phing
 4. Começando
   1. XML e Phing
