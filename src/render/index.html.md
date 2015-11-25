@@ -17,9 +17,9 @@ layout: default
   2. [Obtendo o Phing](capitulo3/obtendo-o-phing.html)
   3. [Instalando através do PEAR](capitulo3/instalando-atraves-do-pear.html)
   4. [Alternativa de instalação](capitulo3/alternativa-de-instalacao.html)
-  5. Usando o Phing
+  5. [Usando o Phing](capitulo3/usando-o-phing.html)
 4. Começando
-  1. XML e Phing
-  2. Escrevendo um simples buildfile
+  1. [XML e Phing](capitulo4/xml-e-phing.html)
+  2. [Escrevendo um simples arquivo XML](capitulo4/escrevendo-um-simples-arquivo.index)
   3. Buildfile um pouco mais complexo
   4. Gramática Relax NG
