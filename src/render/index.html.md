@@ -21,5 +21,5 @@ layout: default
 4. Começando
   1. [XML e Phing](capitulo4/xml-e-phing.html)
   2. [Escrevendo um simples arquivo XML](capitulo4/escrevendo-um-simples-arquivo.index)
-  3. Buildfile um pouco mais complexo
+  3. [Arquivos mais complexos](capitulo4/arquivos-mais-complexos.html)
   4. Gramática Relax NG
