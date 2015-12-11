@@ -80,3 +80,6 @@ Phing da seguinte forma
 ```
 $ phing -Dbuilddir=/tmp/system-test  
 ```
+
+#Gerenciando dependências
+

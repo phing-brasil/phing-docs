@@ -20,6 +20,6 @@ layout: default
   5. [Usando o Phing](capitulo3/usando-o-phing.html)
 4. Começando
   1. [XML e Phing](capitulo4/xml-e-phing.html)
-  2. [Escrevendo um simples arquivo XML](capitulo4/escrevendo-um-simples-arquivo.index)
+  2. [Escrevendo um simples arquivo XML](capitulo4/escrevendo-um-simples-arquivo.html)
   3. [Arquivos mais complexos](capitulo4/arquivos-mais-complexos.html)
   4. Gramática Relax NG
