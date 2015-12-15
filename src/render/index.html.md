@@ -23,3 +23,5 @@ layout: default
   2. [Escrevendo um simples arquivo XML](capitulo4/escrevendo-um-simples-arquivo.html)
   3. [Arquivos mais complexos](capitulo4/arquivos-mais-complexos.html)
   4. Gramática Relax NG
+5. Componentes do projeto
+  1. [Project](capitulo5/project.html)

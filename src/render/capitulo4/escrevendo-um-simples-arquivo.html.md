@@ -74,10 +74,6 @@ $ phing build
 
 ## Elemento **project**
 
-The first element after the document prolog is the root element named 
-<project> on line 3. This element is a container 
-for all other elements and can/must have the following attributes: 
-
 O primeiro elemento depois do prólogo do documento é o elemento raiz **< project>**.
 Esse elemento é um container para todos os outros elementos e pode/deve ter os 
 seguintes atributos:
