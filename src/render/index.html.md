@@ -25,3 +25,5 @@ layout: default
   4. Gramática Relax NG
 5. Componentes do projeto
   1. [Project](capitulo5/project.html)
+  2. [Targets](capitulo5/targets.html)
+  3. [Tasks](capitulo5/tasks.html)
