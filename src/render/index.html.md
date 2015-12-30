@@ -6,12 +6,12 @@ layout: default
 1. [Prefácio](capitulo1/prefacio.html)
   1. [Sobre essa documentação](capitulo1/sobre-essa-documentacao.html)
   2. [Autores](capitulo1/autores.html)
-  3. Licensa
+  3. [Licensa](capitulo1/licensa.html)
 2. Introdução
   1. [O que é Phing](capitulo2/o-que-e-phing.html)
   2. A história: Phing e Binarycloud
   3. [Como Phing funciona ?](capitulo2/como-phing-funciona.html)
-  4. Legal, mas como posso ajudar?
+  4. [Legal, mas como posso ajudar?](capitulo2/como-ajudar.html)
 3. Instalando o Phing
   1. [Requerimentos do sistema](capitulo3/requerimentos-do-sistema.html)
   2. [Obtendo o Phing](capitulo3/obtendo-o-phing.html)
