@@ -27,3 +27,4 @@ layout: default
   1. [Project](capitulo5/project.html)
   2. [Targets](capitulo5/targets.html)
   3. [Tasks](capitulo5/tasks.html)
+  4. [Tipos](capitulo5/tipos.html)

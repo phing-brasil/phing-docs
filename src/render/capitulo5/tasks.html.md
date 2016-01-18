@@ -11,4 +11,9 @@ complexas também como **XlstTask** que copia o arquivo e o modifica utilizando
 XSLT, **SmartyTask** que faz algo similar utilizando os templates do Smarty, ou
 **CreoleTask** que executa SQL no banco de dados.
 
+Tasks suportam os seguintes parâmetros
 
+* Parâmetro simples (strings) passado como atributos de XML ou
+* Parâmetros mais complexos que são passados através de tags
+
+Parâmetros simples são basicamente strings. Por exemplo, se você passar um valor
