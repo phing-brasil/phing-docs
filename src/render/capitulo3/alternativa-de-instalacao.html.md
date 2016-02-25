@@ -4,7 +4,7 @@ title: Alternativa de instalação
 originalLink: https://www.phing.info/docs/stable/hlhtml/index.html#d5e719
 ---
 
-Se você não está usando PEAR, você vai precisar configurar seu ambiente para utilizar o Phing. A distribuição do Phing consiste de três diretórios: **bin**, **docs** e **classes**. Para instalar o Phing, escolha um diretório e descomprima o arquivo de destribuição nesse diretório. Esse diretório será conhecido como PHING_HOME.
+Se você não está usando PEAR, você vai precisar configurar seu ambiente para utilizar o Phing. A distribuição do Phing consiste de três diretórios: **bin**, **docs** e **classes**. Para instalar o Phing, escolha um diretório e descomprima o arquivo de destribuição nesse diretório. Esse diretório será conhecido como `PHING_HOME`.
 
 > **Atenção**:
 > Em versões do Windows o script usado para abrir o Phing terá problemas o caminho definido para PHING_HOME for longo.
@@ -28,3 +28,22 @@ max_execution_time = 0
 
 memory_limit = 32M
 ```
+
+# A maneira mais fácil
+
+Você pode realizar o download do arquivo .phar do Phing clicando no link abaixo
+
+[phing-latest.phar](http://www.phing.info/get/phing-latest.phar)
+
+Após realizar o download apenas execute o arquivo utilizando o PHP, como mostra o exemplo a seguir
+
+```
+php phing-latest.phar
+```
+
+Se tudo ocorreu corretamente você deve ver a seguinte mensagem
+
+```
+Buildfile: build.xml does not exist!
+```
+
