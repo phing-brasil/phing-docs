@@ -2,7 +2,7 @@
 
 Phing Brasil is a project to translate the documentation of Phing in Portuguese from Brazil. We aren't related to [Phing official](https://github.com/phingofficial/phing) project. To any issue please report to the official project, here our  goal is just translate the documentation.
 
-# Phing-docs
+![Phing-docs](https://cloud.githubusercontent.com/assets/2129872/13468562/fd05cae8-e081-11e5-8cb4-e20604b13775.png)
 
 Phing-docs é um projeto criado para a tradução da documentação oficial do projeto Phing. A documentação original do projeto Phing pode ser encontrada em https://www.phing.info/trac/wiki/Users/Documentation
 
