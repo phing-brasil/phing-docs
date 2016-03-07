@@ -8,7 +8,7 @@ Phing-docs é um projeto criado para a tradução da documentação oficial do p
 
 ## Tradução
 
-Você pode visualizar a documentação traduzida para o Português em **http://phing-brasil.github.io/phing-docs/**
+Você pode visualizar a documentação traduzida para o Português em **http://phingbrasil.com.br**
 
 # Phing
 
