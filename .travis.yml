@@ -3,7 +3,7 @@ before_script:
 - chmod +x ./prebuild.sh
 - ./prebuild.sh
 script:
-- docpad deploy-ghpages
+- docpad deploy-ghpages --env static
 env:
   global:
   - GH_REPO="phing-brasil/phing-docs"
