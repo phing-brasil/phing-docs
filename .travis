@@ -1,35 +1,8 @@
-sudo: false
-
 language: node_js
-node_js:
-  - iojs
-cache:
-  directories:
-    - node_modules
-
-script: "npm test"
-
-after_success: >
-  if ([ ! -z "$DEPLOY_TOKEN" ] &&
-      [ "$TRAVIS_BRANCH" == "$DEPLOY_BRANCH" ] &&
-      [ -z "$TRAVIS_TAG" ] &&
-      [ "$TRAVIS_PULL_REQUEST" == "false" ]); then
-    echo "Deploying";
-    git config --global user.email "$DEPLOY_EMAIL";
-    git config --global user.name "$DEPLOY_NAME";
-    git remote rm origin;
-    git remote add origin "https://marabesi:f11230b5c56c18c2a0c2b7375abb4094c4ff9aec@github.com/$TRAVIS_REPO_SLUG.git";
-    npm run-script deploy;
-    echo "Deployed";
-  else
-    echo "Skipped deploy"
-  fi
-
-# Custom Configuration
-# travis encrypt --org "DEPLOY_USER=$GITHUB_USERNAME" --add env.global
-# travis encrypt --org "DEPLOY_TOKEN=$GITHUB_TRAVIS_TOKEN" --add env.global
+before_script:
+- ./prebuild.sh
+script:
+- docpad deploy-ghpages
 env:
   global:
-    - DEPLOY_BRANCH="master"  
-    - DEPLOY_NAME="Travis CI Deployer"
-    - DEPLOY_EMAIL="deployer@travis-ci.org" 
+  - GH_REPO="phing-brasil/phing-docs"
