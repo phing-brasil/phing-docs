@@ -21,7 +21,7 @@
                     clicando <a href="<%= @document.originalLink %>" target="_blank">aqui</a>
                 </p>
                 <a href="../" class="btn-back">Página inicial</a>
-                <span class="site-footer-owner"><a href="https://github.com/phingofficial-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phingofficial-brasil">phingofficial-brasil</a>.</span>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
             </footer>
         </section>
 

@@ -12,14 +12,14 @@
         <section class="page-header">
             <h1 class="project-name">Phing-docs</h1>
             <h2 class="project-tagline"></h2>
-            <a href="https://github.com/phingofficial-brasil/phing-docs" target="_blank" class="btn">Veja no GitHub</a>
-            <a href="https://github.com/phingofficial-brasil/phing-docs/zipball/master" class="btn">Download .zip</a>
-            <a href="https://github.com/phingofficial-brasil/phing-docs/tarball/master" class="btn">Download .tar.gz</a>
+            <a href="https://github.com/phing-brasil/phing-docs" target="_blank" class="btn">Veja no GitHub</a>
+            <a href="https://github.com/phing-brasil/phing-docs/zipball/master" class="btn">Download .zip</a>
+            <a href="https://github.com/phing-brasil/phing-docs/tarball/master" class="btn">Download .tar.gz</a>
         </section>
         <section class="main-content">
             <%- @content %>
             <footer class="site-footer">
-                <span class="site-footer-owner"><a href="https://github.com/phingofficial-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phingofficial-brasil">phingofficial-brasil</a>.</span>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
             </footer>
         </section>
 
