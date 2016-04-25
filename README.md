@@ -10,6 +10,10 @@ Phing-docs é um projeto criado para a tradução da documentação oficial do p
 
 Você pode visualizar a documentação traduzida para o Português em **http://phingbrasil.com.br**
 
+## Curso totalmente de graça
+
+Quer conhecer mais sobre o Phing sem pagar nada ? Acompanhe o curso realizado pela Webschool em https://github.com/Webschool-io/Curso-Phing
+
 # Phing
 
 Phing (PHing Is Not GNU make) é um sistema de automação de tarefas baseado no Apache Ant, mas escrito em PHP. Você pode fazer qualquer coisa com ele que você faria com um sistema de automação tradicional, como o [GNU make](https://www.gnu.org/software/make/).
