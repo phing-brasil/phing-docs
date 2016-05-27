@@ -10,9 +10,6 @@ corretamente
 
 ## Linha de comando
 
-Phing execution on the command line is simple. Just change to the directory where 
-your buildfile resides and type
-
 A execução através da linha de comando é fácil. Apenas vá aonde o seu arquivo XML
 está localizado e execute
 

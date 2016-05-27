@@ -30,7 +30,7 @@ layout: default
   4. [Tipos](capitulo5/tipos.html)
   5. [Tipos básicos](capitulo5/tipos-basicos.html)
 6. [Estendendo o Phing](capitulo6/estendendo-o-phing.html)
-  1. [Possibilidades de estensão](capitulo6/possibilidades-de-estensao.html)
+  1. [Possibilidades de extensão](capitulo6/possibilidades-de-extensao.html)
   2. [Leiaute inicial](capitulo6/leiaute-inicial.html)
   3. [Inicialização do sistema](capitulo6/inicializacao-do-sistema.html)
   4. [Serviços](capitulo6/servicos.html)
