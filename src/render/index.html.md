@@ -31,10 +31,10 @@ layout: default
   5. [Tipos básicos](capitulo5/tipos-basicos.html)
 6. [Estendendo o Phing](capitulo6/estendendo-o-phing.html)
   1. [Possibilidades de extensão](capitulo6/possibilidades-de-extensao.html)
-  2. [Leiaute inicial]
-  3. [Inicialização do sistema]
-  4. [Serviços]
-  5. [Ciclo de vida do build]
-  6. [Escrevendo tasks]
-  7. [Escrevendo tipos]
-  8. [Escrevendo mappers]
+  2. [Estrutura do Phing](capitulo6/estrutura-do-phing.html)
+  3. [Inicialização do sistema](capitulo6/inicializacao-do-sistema.html)
+  4. [Serviços](capitulo6/servicos.html)
+  5. [Ciclo de vida do build](capitulo6/ciclo-de-vida-do-build.html)
+  6. [Escrevendo tasks](capitulo6/escrevendo-tasks.html)
+  7. [Escrevendo tipos](capitulo6/escrevendo-tipos.html)
+  8. [Escrevendo mappers](capitulo6/escrevendo-mappers.html)

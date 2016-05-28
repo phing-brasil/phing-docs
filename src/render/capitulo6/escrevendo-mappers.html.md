@@ -1,14 +1,20 @@
 ---
 layout: page
-title: Tipos básicos
+title: Escrevendo mappers
 originalLink: https://www.phing.info/docs/stable/hlhtml/index.html#d5e2009
 ---
 
-Writing your own filename mapper classes will allow you to control how names are transformed in tasks like CopyTask, MoveTask, XSLTTask, etc. In some cases you may want to extend existing mappers (e.g. creating a GlobMapper that also transforms to uppercase); in other cases, you may simply want to create a very specific name transformation that isn't easily accomplished with other mappers like GlobMapper or RegexpMapper.
+Writing your own filename mapper classes will allow you to control how names are transformed in tasks 
+like CopyTask, MoveTask, XSLTTask, etc. In some cases you may want to extend existing mappers (e.g. creating 
+a GlobMapper that also transforms to uppercase); in other cases, you may simply want to create a very specific 
+name transformation that isn't easily accomplished with other mappers like GlobMapper or RegexpMapper.
 
 6.8.1 Creating a Mapper
 
-Writing filename mappers is simplified by interface support in PHP5. Essentially, your custom filename mapper must implement phing.mappers.FileNameMapper. Here's an example of a filename mapper that creates DOS-style file names. For this example, the "to" and "from" attributes are not needed because all files will be transformed. To see the "to" and "from" attributes in action, look at phing.mappers.GlobMapper or phing.mappers.RegexpMapper.
+Writing filename mappers is simplified by interface support in PHP5. Essentially, your custom filename mapper 
+must implement phing.mappers.FileNameMapper. Here's an example of a filename mapper that creates DOS-style 
+file names. For this example, the "to" and "from" attributes are not needed because all files will be transformed. 
+To see the "to" and "from" attributes in action, look at phing.mappers.GlobMapper or phing.mappers.RegexpMapper.
 
 require_once "phing/mappers/FileNameMapper.php";
 
@@ -64,6 +70,7 @@ class DOSMapper implements FileNameMapper {
 }
 6.8.2 Using the Mapper
 
-Assuming that this mapper is saved to myapp/mappers/DOSMapper.php (relative to a path on PHP's include_path or in PHP_CLASSPATH env variable), then you would refer to it like this in your build file:
+Assuming that this mapper is saved to myapp/mappers/DOSMapper.php (relative to a path on PHP's include_path or 
+in PHP_CLASSPATH env variable), then you would refer to it like this in your build file:
 
 <mapper classname="myapp.mappers.DOSMapper"/>
