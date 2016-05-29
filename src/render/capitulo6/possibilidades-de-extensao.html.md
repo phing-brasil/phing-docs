@@ -4,7 +4,7 @@ title: Possibilidades de extensão
 originalLink: https://www.phing.info/docs/stable/hlhtml/index.html#d5e1687
 ---
 
-Existem 3 áreas principais em que o Phing pode ser estendido: **Tasks**, tipos e **mappers**. As sessões a seguir discutem estas 
+Existem 3 áreas principais em que o Phing pode ser estendido: **Tasks**, tipos e **mappers**. As sessões a seguir discutem estas  
 opções.
 
 ## **Tasks**
@@ -16,10 +16,10 @@ necessariamente deve - usar outras classes, **workers** e bibliotecas que ajudam
 
 ## Tipos
 
-Extender tipos é uma necessidade rara; Ainda assim, você pode fazê-lo. Um possível tipo que você pode implementar é uma 
+Extender tipos é uma necessidade rara; Ainda assim, você pode fazê-lo. Um possível tipo que você pode implementar é uma  
 **urlset**, por exemplo.
 
-Você pode acaber precisando de um novo tipo para uma **task** que você escreveu; por exemplo, se você estiver escrevendo o 
+Você pode acaber precisando de um novo tipo para uma **task** que você escreveu; por exemplo, se você estiver escrevendo o  
 **XSLTTask** você pode descobrir que você vai precisar de um tipo especial para o **XSLTParams** (mesmo que nesse caso você 
 poderia usar o tipo de parâmetro genérico nome/valor). Em casos onde o tipo é realmente exclusivo de uma única tarefa, você 
 pode querer apenas definir a classe de tipo no mesmo arquivo que a classe **Tasks**, ao invés de criar um tipo oficial 

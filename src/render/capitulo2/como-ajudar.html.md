@@ -12,8 +12,8 @@ Para se envolver comece fazendo o seguinte:
 
 * Leia esse manual para entender o Phing
 * Vá ao site do Phing e se inscreva na lista de e-mail
-* Vá atpe o site do Phing e procure por bugs/tickets existentes, e claro para começar ativamente no desenvolvimento
-forke o repositório
+* Vá até o site do Phing e procure por bugs/tickets existentes, e claro para começar ativamente no desenvolvimento
+faça o fork do repositório
 
 ## Participando no desenvolvimento
 
@@ -23,7 +23,8 @@ Para contribuir com o Phing sigas os seguintes passos:
 
 1. Registre-se no Github
 2. Clone o [repositório oficial](https://github.com/phingofficial/phing)
-3. Leia toda a documentação no Github de como configurar o Phing (Qualquer dúvida que você tenha pergunte aos membro oficiais que mantém o projeto)
+3. Leia toda a documentação no Github de como configurar o Phing (Qualquer dúvida que você tenha pergunte aos membro oficiais 
+que mantém o projeto)
 
 As chances de aceitarmos o seu pull request crescem se você seguir as seguintes recomendações:
 
