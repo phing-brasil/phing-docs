@@ -38,7 +38,7 @@ Se você quer incluir múltiplos diretórios e/ou arquivos use `**`. Dessa forma
 
 Como Fileset, Filelist são coleções de arquivos, entretanto, Filelist é uma lista definida de arquivos (e os arquivos não precisam efetivamente existir no sistema operacional).
 
-Além de permitir referenciar arquivos não existentes , Filelist nos permite especificar os arquivos em uma determinada ordem. Arquivos em Filset são ordenados pelo sistema operacional, e em alguns casos você vai querer especificar uma lista de arquivos para serem processados em uma determinada ordem
+Além de permitir referenciar arquivos não existentes, Filelist nos permite especificar os arquivos em uma determinada ordem. Arquivos em Filset são ordenados pelo sistema operacional, e em alguns casos você vai querer especificar uma lista de arquivos para serem processados em uma determinada ordem
 
 ``` xml
 <filelist dir="base/" files="file1.txt,file2.txt,file3.txt"/>
