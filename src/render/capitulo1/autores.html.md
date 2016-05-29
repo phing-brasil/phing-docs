@@ -16,3 +16,4 @@ originalLink: https://www.phing.info/docs/stable/hlhtml/index.html#d5e63
 # Autores da tradução para PT-BR
 
 * Matheus Marabesi, matheus.marabesi@gmail.com
+* Plínio Almeida, plinioalmeida20@gmail.com
