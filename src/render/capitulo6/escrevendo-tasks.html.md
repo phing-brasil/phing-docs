@@ -141,7 +141,7 @@ your prior declared properties here.
 
 6.6.9 Setter Methods
 
-As you can see in the XML definition of our task ([see buildfile above] , line 9) there is an attribute
+As you can see in the XML definition of our task ([see buildfile above], line 9) there is an attribute
  defined with the task itself, namely "message" with a value of the text string that our task should echo. 
  The task must somehow become aware of the attribute name and the value. Therefore the setter methods exist.
 
@@ -155,7 +155,7 @@ valid value. If this is not the case, throw a BuildException. In some cases, suc
 attributes and at least one of them should be set, you may want to check the attribute values inside the 
 init() or main() method.
 
-In out example the setter is named setMessage , because the XML attribute the echo task accepts is "message". 
+In out example the setter is named setMessage, because the XML attribute the echo task accepts is "message". 
 setMessage now takes the string "Hello World" provided by the parser and sets the value of the internal class
  property $strMessage to "Hello World". It is now available to the task for further disposal.
 
