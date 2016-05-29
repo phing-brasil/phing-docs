@@ -4,8 +4,8 @@ title: Serviços
 originalLink: https://www.phing.info/docs/stable/hlhtml/index.html#d5e1818
 ---
 
-6.4.1 The Exception system
+## O sistema de exceção
 
-Phing uses the PHP5 try/catch/throw Exception system. Phing defines a number of Exception subclasses 
-for more fine-grained handling of Exceptions. Low level Exceptions that cannot be handled will be 
-wrapped in a BuildException and caught by the outer-most catch() {} block.
+O Phing usa o sistema de exceção **try/catch/throw** do PHP5. Ele define algumas subclasses para maior refinamento ao tratar
+as Exceções. Exceções de baixo nível que não puderem ser tratadas entrarão em uma exceção **BuildException** e serão
+tratadas por um bloco catch externo.
