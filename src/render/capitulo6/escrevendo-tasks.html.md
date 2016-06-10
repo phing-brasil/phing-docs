@@ -4,12 +4,12 @@ title: Escrevendo tasks
 originalLink: https://www.phing.info/docs/stable/hlhtml/index.html#d5e1862
 ---
 
-6.6.1 Creating A Task
+## Criando uma task
 
-We will start creating a rather simple task which basically does nothing more than echo a message to the 
-screen. See [below] for the source code and the following [below] for the XML definition that is used for 
-this task.
+Vamos começar criando uma task simples que não faz nada além de exibir uma mensagem na tela. Veja abaixo o código e 
+o XML que serão usados para esta task.
 
+```php
 <?php
 
 require_once "phing/Task.php";
@@ -17,26 +17,26 @@ require_once "phing/Task.php";
 class MyEchoTask extends Task {
 
     /**
-     * The message passed in the buildfile.
+     * A mensagem passada no arquivo de build
      */
     private $message = null;
 
     /**
-     * The setter for the attribute "message"
+     * O setter para o atributo "message"
      */
     public function setMessage($str) {
         $this->message = $str;
     }
 
     /**
-     * The init method: Do init steps.
+     * O método de inicialização: Executa os passos iniciais.
      */
     public function init() {
         // nothing to do here
     }
 
     /**
-     * The main entry point method.
+     * O método de entrada
      */
     public function main() {
         print($this->message);
@@ -44,17 +44,20 @@ class MyEchoTask extends Task {
 }
 
 ?>
-This code contains a rather simple, but complete Phing task. It is assumed that the file is named MyEchoTask.php. 
-For this example, we're assuming that the file is placed in /home/example/classes. We'll explain the source code 
-in detail shortly. But first we'd like to discuss how we should register the task to Phing so that it can be 
-executed during the build process.
+```
 
-6.6.2 Using the Task
+Este código contém uma task simples, porém completa. O arquivo deve ser nomeado MyEchoTask.php. Para este exemplo, 
+nós assumimos que este arquivo está localizado na pasta /home/example/classes. Nós iremos explicar o código fonte em 
+detalhes, mas primeiro vamos mostrar como devemos registrar a task no Phing para que ela possa ser executada durante 
+o processo de build.
 
-The task shown [above] must somehow get loaded and called by Phing. Therefore it must be made available to Phing 
-so that the buildfile parser is aware a correlating XML element and it's parameters. Have a look at the minimalistic 
-buildfile example given in [the buildfile below] that does exactly this.
+## Usando a task
 
+A task mostrada abaixo deve ser carregada e chamada pelo Phing. Além disso ela deve estar disponível para o Phing para 
+que o arquivo de build relacione seus elementos e parâmetros XML. Dê uma olhada nesse arquivo de build minimalista que 
+faz exatamente isso.
+
+```xml
 <?xml version="1.0" ?>
 
 <project name="test" basedir="." default="test.myecho">
@@ -65,130 +68,128 @@ buildfile example given in [the buildfile below] that does exactly this.
       <myecho message="Hello World" />
     </target>
 </project>
-To register the custom task with Phing, the taskdef element (line 5) is used. See Section B.40, “TaskdefTask ” for 
-a more detailed explanation. Optionally, before the taskdef element, the includepath element adds a path to PHP's 
-include path. This is of course only required if the mentioned path isn't already on the include path. See 
-Section B.24, “IncludePathTask ” for a more detailed explanation.
+```
 
-Now, as we have registered the task by assigning a name and the worker class ([see source code above]) it is ready 
-for usage within the <target> context (line 8). You see that we pass the message that our task should echo to the 
-screen via an XML attribute called "message".
+Para registrar uma task customizada com o Phing, o elemento taskdef (linha 5) é utilizado. Opcionalmente, antes do 
+elemento taskdef, o elemento includepath adiciona um path ao include_path do PHP.
 
-6.6.3 Source Discussion
+Após registrarmos a task atribuindo um nome e a classe relacionada, ela está pronta para uso dentro do contexto 
+<target> (linha 8). Veja que passamos a mensagem que nossa task deve exibir na tela através de um atributo XML 
+chamado "message".
 
-Now that you've got the knowledge to execute the task in a buildfile it's time to discuss how everything works.
+## Discutindo o código
 
-6.6.4 Task Structure
+Agora que já sabemos como executar uma task em um arquivo de build, é hora de discutir como tudo funciona.
 
-All files containing the definition of a task class follow a common well formed structure:
+## Estrutura da task
 
-Include/require statements to import all required classes
+Todos os arquivos que contém a definição de uma task seguem uma estrutura comum:
 
-The class declaration and definition
++ Comandos Include/require para importar todas as classes necessárias
 
-The class's properties
++ Definição e declaração da classe
 
-The class's constructor
++ Propriedades da classe
 
-Setter methods for each XML attribute
++ Construtor da classe
 
-The init() method
++ Métodos setters para cada atributo XML
 
-The main() method
++ O método init()
 
-Arbitrary private (or protected) class methods
++ O método main()
 
-6.6.5 Includes
++ Métodos private (ou protected) arbitrários
 
-Always include/require all the classes needed for this task in full written notation. Furthermore you should always
-include phing/Task.php at the very top of your include block. Then include all other required system or proprietary 
-classes.
+## Includes
 
-6.6.6 Class Declaration
+Sempre importe todas as classes necessárias para a task. Alé, disso, você sempre deve importar phing/Task.php 
+no começo do seu bloco de inclusão. Então inclua todas as outras classes de sistema ou proprietárias.
 
-If you look at line 5 in [the source code of the task] you will find the class declaration. This will be familiar 
-to you if you are experienced with OOP in PHP (we assume here that you are). Furthermore there are some fine-grained 
-rules you must obey when creating the classes (see also,[naming and coding standards]):
+## Declaração de classes
 
-Your classname must be exactly like the taskname you are going to implement plus the suffix "Task". In our example 
-case the classname is MyEchoTask (constructed by the taskname "myecho" plus the suffix "task"). The upper/lower 
-case casing is currently only for better reading. However, it is encouraged that you use it this way.
+Na linha 5 do bloco PHP você irá encontrar a declaração da classe. Vai lhe parecer familiar se você tem experiência 
+com POO no PHP (vamos assumir que você é). Além disso existem algumas regras que você deve obedecer ao criar classes:
 
-The task class you are creating must at least extend "Task" to inherit all task specific methods.
++ O nome da classe deve ser exatamente igual ao da task que você irá implementar mais o sufixo "Task". No nosso 
+exemplo o nome da classe é MyEchoTask (construído pelo nome da task "myecho" mais o sufixo "task"). Utilizamos 
+maíusculas/minúsculas é para uma melhor leitura, porém encorajamos que você siga este padrão.
 
-6.6.7 Class Properties
++ A classe task que você criar deve estender a classe "Task" para herdar todos os seus métodos específicos.
 
-The next lines you are coding are class properties. Most of them are inherited from the Task superclass, so there's 
-not need to redeclare them. Nevertheless you should declare the following ones by your own:
+## Propriedades da classe
 
-Taskname. Always hard code the taskname property that equals the name of the XML element that your task claims. 
-Currently this information is not used - but it will be in the future.
+Depois da declaração da classe vem as propriedades. A maioria delas é herdada da classe pai Task, então não há 
+necessidade de redeclará-las. Você deve declarar as seguintes propriedades:
+ 
++ Taskname. Sempre especifique a propriedade taskname que é a mesma do elemento XML que sua task utiliza. 
+Hoje essa informação não é utilizada - mas será no futuro.
 
-Your arbitrary properties that reflect the XML attributes/elements which your task accepts.
++ Suas propriedades arbitrárias que refletem os atributos/elementos do XML que a sua task aceita.
 
-In the MyEchoTask example the coded properties can be found in lines 7 to 11. Give you properties meaningful
- descriptive names that clearly state their function within the context. A couple of properties are inherited 
- from the superclass that must not be declared in the properties part of the code.
+No exemplo MyEchoTask as propriedades podem ser encontradas entre as linhas 7 e 11. Utilize nomes descritivos 
+que deixam claro seu papel no contexto da task. Algumas propriedades herdadas da classe pai não devem ser 
+declaradas na parte de propriedades do código.
 
-For a list of inherited properties (most of them are reserved, so be sure not to overwrite them with your own)
- can be found in the "Phing API Reference" in the docs/api/ directory.
+Uma lista das propriedades herdadas (a maioria delas reservada, então certifique-se de não sobrescrevê-las) pode 
+ser encontrada na "API de referência do Phing" no diretório docs/api/.
 
-6.6.8 The Constructor
+## O construtor
 
-The next block that follows is the class's constructor. It must be present and call at least the constructor 
-or the parent class. Of course, you can add some initialization data here. It is recommended that you define 
-your prior declared properties here.
+O próximo bloco é o construtor da classe. Ele deve estar presente e chamar, pelo menos, o construtor da classe pai. 
+É claro que você pode adicionar dados de inicialização aqui. É recomendado que você defina aqui o valor das 
+propriedades que você declarou.
 
-6.6.9 Setter Methods
+## Métodos setter
 
-As you can see in the XML definition of our task ([see buildfile above], line 9) there is an attribute
- defined with the task itself, namely "message" with a value of the text string that our task should echo. 
- The task must somehow become aware of the attribute name and the value. Therefore the setter methods exist.
+Como você pode ver no XML de definição da nossa task (linha 9), há um atributo definido com a própria task, chamado 
+"message" com o texto que a nossa classe deve exibir. A task deve de alguma maneira receber o nome e o valor do 
+atributo. Para isso exite o método setter.
 
-For each attribute you want to import to the task's namespace you have to define a method named exactly 
-after the very attribute plus the string "set" prepended. This method accepts exactly one parameter that 
-holds the value of the attribute. Now you can set the a class internal property to the value that is 
-passed via the setter method.
+Para cada atributo que você quiser importar para o namespace da task você deve definir um método nomeado a partir 
+do atributo com o prefixo "set". Este método aceita exatamente um parâmetro que contém o valor do atributo. Assim 
+você pode definir a propriedade da classe com o valor que é setado a partir do método setter.
 
-In the setter method you should also perform any casting operations and/or check if the attribute value is a 
-valid value. If this is not the case, throw a BuildException. In some cases, such as when you have three 
-attributes and at least one of them should be set, you may want to check the attribute values inside the 
-init() or main() method.
+No método seter você deveria também executar qualquer operação de cast ou de verificação se o valor é válido. Se 
+for o caso, retorne uma exceção BuildException. Em alguns casos, como quando você tem três atributos e pelo menos 
+um deles deve ser setado, você pode checar os valores dos atributos nos métodos init() ou main().
 
-In out example the setter is named setMessage, because the XML attribute the echo task accepts is "message". 
-setMessage now takes the string "Hello World" provided by the parser and sets the value of the internal class
- property $strMessage to "Hello World". It is now available to the task for further disposal.
+No nosso exemplo o setter é chamado setMessage, porque o atributo que a nossa task recebe é "message". setMessage 
+então pega a string "Hello World" provida pelo parser e seta o valor na propriedade $strMessage da classe. O valor 
+está agora disponível para uso na nossa task.
 
-6.6.10 Creator Methods
+## Métodos criadores
 
-Creator methods allow you to manage nested XML tags in your new Phing Task.
+São métodos que permitem que você gerencie tags aninhadas do XML na sua nova task do Phing.
 
-6.6.11 init() Method
+## O método init()
 
-The init method gets called when the <taskname> xml element closes. It must be implemented even if it does 
-nothing like in the example above. You can do init steps here required to setup your task object properly. 
-After calling the Init-Method the task object remains untouched by the parser. Init should not perform 
-operations related somehow to the action the task performs. An example of using init may be cleaning up the 
-$strMessage variable in our example (i.e. trim($strMessage)) or importing additional workers needed for this task.
+O método init deve ser implementado mesmo quando ele não faz nada, como no nosso exemplo. Você pode fazer suas 
+inicializações de setup da sua task. Depois de chamar o método init o objeto task continua o mesmo para o parser. 
+O método init não deve executar operações relacionadas a ações da task. Um exemplo de utilização do init seria 
+tratar o valor da variável $strMessage (por exemplo, trim($strMessage)) ou importar workers adicionais que serão 
+necessários para a task.
 
-The init method should return true or an error object evaluated by the governing logic. If you don't implement 
-init method, phing will shout down with a fatal error.
+O método init deve retornar true ou um objeto de erro. Se você não implementar o método init o Phing irá retornar 
+um fatal error.
 
-6.6.12 main() Method
+## O método main()
 
-There is exactly one entry point to execute the task. It is called after the complete buildfile has been parsed 
-and all targets and tasks have been scheduled for execution. From this point forward the very implementation of 
-the tasks action starts. In case of our example a message (imported by the proper setter method) is Logged to 
-the screen through the system's "Logger" service (the very action this task is written for). The Log() method-call 
-in this case accepts two parameters: a event constant and the message to log.
+Existe exatamete um único ponto de entrada para executar a task. Ele é chamado após o arquivo buildfile ter sido 
+completamente interpretado e todos targets e tasks tenham sido agendados para execução. A partir deste ponto 
+começa a implementação das ações da task. No caso do nosso exemplo, uma mensagem (importada pelo método setter) é 
+logada na tela através do serviço "Logger" do sistema (é a ação para que a task foi escrita). A chamada do método 
+Log() neste caso aceita dois parâmetros: uma constante de evento e a mensagem para o log.
 
-6.6.13 Arbitrary Methods
+## Métodos arbitrários
 
-For the more or less simple cases (as our example) all the logic of the task is coded in the Main() method. 
-However for more complex tasks common sense dictates that particular action should be swapped to smaller, 
-logically contained units of code. The most common way to do this is separating logic into private class methods
- - and in even more complex tasks in separate libraries.
+Para casos mais ou menos simples (como o nosso exemplo) toda a lógica da task é feita no método main(). Porém, para 
+tasks mais complexas o bom senso indica que uma ação deve ser dividida em partes menores de código. O meio mais comum 
+de se fazer isso é separar a lógica em métodos privados da classe - e em casos mais complexos, separar em uma 
+biblioteca.
 
+```php
 private function myPrivateMethod() {
     // definition
 }
+```

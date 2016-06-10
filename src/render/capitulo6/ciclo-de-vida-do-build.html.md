@@ -4,33 +4,32 @@ title: Ciclo de vida do build
 originalLink: https://www.phing.info/docs/stable/hlhtml/index.html#d5e1824
 ---
 
-This section exists to explain -- or try -- how Phing "works". Particularly, how Phing proceeds through a 
-build file and invokes tasks and types based on the tags that it encounters.
+Esta seção existe para explicar - ou tentar - como o Phing "funciona". Particularmente,como o Phing processa o arquivo build e 
+invoca tasks e tipos baseado nas tags que ele encontra.
 
-6.5.1 How Phing Parses Buildfiles
+## Como o Phing interpreta os arquivos de build
 
-Phing uses an ExpatParser class and PHP's native expat XML functions to handle the parsing of build files. 
-The handler classes all extend the phing.parser.AbstractHandler class. These handler classes "handle" the 
-tags that are found in the buildfile.
+O Phing usa uma classe ExpatParser e funções nativas do PHP para interpretação de XML para manipular os arquivos de 
+build. Todas as classes de manipulação estendem a classe phing.parser.AbstractHandler. Estas classes manipulam as tags 
+que são encontradas no arquivo de build.
 
-Core tasks and datatypes are mapped to XML tag names in the defaults.properties files -- specifically 
-phing/tasks/defaults.properties and phing/types/defaults.properties.
+Tasks principais e tipos são mapeados para tags XML nos arquivos defaults.properties - especificamente 
+phing/tasks/defaults.properties e phing/types/defaults.properties.
 
-It works roughly like this:
+Basicamente, funciona assim:
 
-phing.parser.RootHandler is registered to handle the buildfile XML document
+1. phing.parser.RootHandler é registrado para manipular o documento XML de build.
 
-RootHanlder expects to find exactly one element: <project>. RootHandler invokes the ProjectHandler with the 
-attributes from the <project> tag or throws an exception if no <project> is found, or if something else is 
-found instead.
+2. RootHanlder espera encontrar exatamente um elemento: <project>. Ele invoca o ProjectHandler com os atributos da 
+tag <project> ou retorna uma exceção se <project> não for encontrado ou se alguma coisa for encontrada em seu lugar.
 
-ProjectHandler expects to find <target> tags; for these ProjectHandler invokes the TargetHandler. ProjectHandler 
-also has exceptions for handling certain tasks that can be performed at the top-level: <resolve>, <taskdef>, 
-<typedef>, and <property>; for these ProjectHandler invokes the TaskHandler class. If a tag is presented that 
-doesn't match any expected tags, then ProjectHandler assumes it is a datatype and invokes the DataTypeHandler.
+3. ProjectHandler espera encontrar tags <target>; para elas ele invoca o TargetHandler. Ela também tem exceções para 
+manipular certas tarefas que podem ser executadas com prioridade: <resolve>, <taskdef>, <typedef>, e <property>; 
+para estas ele invoca a classe TaskHandler. Se uma tag apresentada não corresponde às tags esperadas, ele assume 
+que ela é um tipo e invoca a classeDataTypeHandler.
 
-TargetHandler expects all tags to be either tasks or datatypes and invokes the appropriate handler (based on 
-the mappings provided in the defaults.properties files).
+4. TargetHandler espera que todas as tags sejam tarefas ou tipos e invoca o manipulador apropriado (baseado no 
+mapeamento especificado nos arquivos defaults.properties).
 
-Tasks and datatypes can have nested elements, but only if they correspond to a create*() method in the task or 
-datatype class. E.g. a nested <param> tag must correspond to a createParam() method of the task or datatype.
+5. Tasks and tipos podem ter elementos aninhados, mas somente se eles corresponderem a um método create*() na classe 
+de tarefa ou tipo. Por exemplo, uma tag aninhada <param> pode corresponder a um método createParam() da task ou do tipo.
