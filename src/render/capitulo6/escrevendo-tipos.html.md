@@ -4,29 +4,31 @@ title: Escrevendo tipos
 originalLink: https://www.phing.info/docs/stable/hlhtml/index.html#d5e1976
 ---
 
-You should only create a standalone Type if the Type needs to be shared by more than one Task. If the Type 
-is only needed for a specific Task -- for example to handle a special parameter or other tag needed for 
-that Task -- then the Type class should just be defined within the same file as the Task. (For example, 
-phing/filters/XSLTFilter.php also includes an XSLTParam class that is not used anywhere else.)
+Você só deve criar novos tipos se o tipo precisa ser compartilhado com mais de uma task. Se o tipo só é utilizado 
+em uma task específica - por exemplo, manipular um parâmetro ou outra tag necessária para a task - então a classe 
+Type deve ser definida no mesmo arquivo que a task (Por exemplo, phing/filters/XSLTFilter.php também inclui uma 
+classe XSLTParam que não é usada em nenhum outro lugar).
+ 
+Para casos onde você precisa de tipos mais genéricos, você pode criar sua própria classe Type - similar ao jeito 
+de ser criar uma task.
 
-For cases where you do need a more generic Type defined, you can create your own Type class -- similar 
-to the way a Task is created.
+## Criando um Tipo de dados
 
-6.7.1 Creating a DataType
 
-Type classes need to extend the abstract DataType class. Besides providing a means of categorizing types,
-the DataType class provides the methods necessary to support the "refid" attribute. (All types can be given
- an id, and can be referred to later using that id.)
+Classes Type precisam estender a classe abstrata DataType. Além de prover meios de categorizar tipos, a classe 
+DataType provê os métodos necessários para suportar o atributo "refid" (Todos os tipos podem ter um id, e eles 
+podem ser referenciados mais tarde utilizando esse id).
 
-In this example we are creating a DSN type because we have written a number of DB-related Tasks, each of 
-which need to know how to connect to the database; instead of having database parameters for each task, 
-we've created a DSN type so that we can identify the connection parameters once and then use it in all our
- db Tasks.
+Nesse exemplo nós criamos um tipo DSN porque nós escrevemos várias tasks relacionadas a banco, e cada uma delas 
+precisa saber como se conectar ao banco; ao invés de ter parâmetros de banco de dados para cada task, vamos criar 
+um tipo DSN para podermos identificar os parâmetros da conexão apenas uma vez e então usá-los em todas as nossas 
+tasks.
 
+```php
 require_once "phing/types/DataType.php";
 
 /**
- * This Type represents a DB Connection.
+ * Este tipo representa uma conexão de banco de dados
  */
 class DSN extends DataType {
 
@@ -36,28 +38,28 @@ class DSN extends DataType {
   private $persistent = false;
 
   /**
-   * Sets the URL part: mysql://localhost/mydatabase
+   * Define a parte da URL: mysql://localhost/mydatabase
    */
   public function setUrl($url) {
     $this->url = $url;
   }
 
   /**
-   * Sets username to use in connection.
+   * Define o usuário a ser utilizado na conexão
    */
   public function setUsername($username) {
     $this->username = $username;
   }
 
   /**
-   * Sets password to use in connection.
+   * Define a senha a ser utilizada na conexão
    */
   public function setPassword($password) {
     $this->password = $password;
   }
 
   /**
-   * Set whether to use persistent connection.
+   * Define se será utilizada uma conexão persistente
    * @param boolean $persist
    */
   public function setPersistent($persist) {
@@ -93,7 +95,7 @@ class DSN extends DataType {
   }
 
   /**
-   * Gets a combined hash/array for DSN as used by PEAR.
+   * Retorna um hash/array combinado para o DSN como o utilizado pelo PEAR.
    * @return array
    */
   public function getPEARDSN(Project $p) {
@@ -111,9 +113,9 @@ class DSN extends DataType {
   }
 
   /**
-   * Your datatype must implement this function, which ensures that there
-   * are no circular references and that the reference is of the correct
-   * type (DSN in this example).
+   * Seu tipo deve implementar esta função, que certifica que
+   * não há referências circulares e que as referências são do 
+   * tipo correto(DSN neste exemplo).
    *
    * @return DSN
    */
@@ -132,14 +134,16 @@ class DSN extends DataType {
   }
 
 }
-6.7.2 Using the DataType
+```
 
-The TypedefTask provides a way to "declare" your type so that you can use it in your build file. Here is how
- you would use this type in order to define a single DSN and use it for multiple tasks. (Of course you could
-  specify the DSN connection parameters each time, but the premise behind needing a DSN datatype was to avoid 
-  specifying the connection parameters for each task.)
+## Usando o tipo
 
+O TypedefTask provê uma maneira de declarar seu tipo para que você possa usá-lo no seu arquivo de build. Neste exemplo 
+está mostrado como você usaria esse tipo para definir um único DSN e usá-lo em múltiplas tasks (É claro que você poderia 
+especificar os parâmetros da conexão DSN todas as vezes, mas as premissas por trás de se ter um tipo é evitar especificar 
+a os parâmetros da conexão para cada task).
 
+```xml
 <?xml version="1.0" ?>
 
 <project name="test" basedir=".">
@@ -166,27 +170,28 @@ The TypedefTask provides a way to "declare" your type so that you can use it in 
   </target>
 
 </project>
-6.7.3 Source Discussion
+```
 
-Getters & Setters
+## Discussão do Código
+ 
+### Getters e Setters
 
-You must provide a setter method for every attribute you want to set from the XML build file. It is good 
-practice to also provide a getter method, but in practice you can decide how your tasks will use your task. 
-In the example above, we've provided a getter method for each attribute and we've also provided an additional
- method:DSN::getPEARDSN() which returns the DSN hash array used by PEAR::DB, PEAR::MDB, and Creole. Depending
-  on the needs of the Tasks using this DataType, we may only wish to provide the getPEARDSN() method rather 
-  than a getter for each attribute.
+Você deve prover um método seter para cada atributo que você quiser passar no seu arquivo de build. É uma 
+boa prática também definir um método getter, mas na prática você decide como suas tasks irão usar seu tipo.
+No exemplo acima nós definimos um método getter para cada atributo e também definimos um método getter adicional: 
+DSN::getPEARDSN() que retorna o hash DSN para ser utilizado pelo PEAR::DB, PEAR::MDB e Creole. Dependendo da 
+necessidade da task, nós podemos definir apenas o método getPEARDSN() ao invés de definir um método para cada 
+atributo.
 
-Also important to note is that the getter method needs to check to see whether the current DataType is a 
-reference to a previously defined DataType -- the DataType::isReference() exists for this purpose. For this
-reason, the getter methods need to be called with the current project, because References are stored 
-relative to a project.
+Também é importante notar que o método getter deve checar se o tipo atual é uma referência a um tipo previamente 
+definido - o método DataType::isReference() serve para este propósito. Por isso, o método getter deve ser chamado 
+no projeto atual, porque as referências são relativas a um projeto.
 
-The getRef() Method
+### O método getRef()
 
-The getRef() task needs to be implemented in your Type. This method is responsible for returning a referenced 
-object; it needs to check to make sure the referenced object is of the correct type (i.e. you can't try to 
-refer to a RegularExpresson from a DSN DataType) and that the reference is not circular.
+O método getRef() precisa ser implementado no seu tipo. Este método é responsável por retornar um objeto referenciado; 
+ele precisa se certificar que o objeto referenciado é do tipo correto (por exemplo, você pode tentar referenciar uma 
+RegularExpression a partir de um tipo DSN) e que a referência não é circular.
 
-You can probably just copy this method from an existing Type and make the few changes that customize it to 
-your Type.
+Você pode provavelmente copiar este método a partir de um tipo existente e fazer algumas modificações para 
+customizá-lo para o seu tipo.

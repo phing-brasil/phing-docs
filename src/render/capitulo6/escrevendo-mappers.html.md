@@ -4,40 +4,43 @@ title: Escrevendo mappers
 originalLink: https://www.phing.info/docs/stable/hlhtml/index.html#d5e2009
 ---
 
-Writing your own filename mapper classes will allow you to control how names are transformed in tasks 
-like CopyTask, MoveTask, XSLTTask, etc. In some cases you may want to extend existing mappers (e.g. creating 
-a GlobMapper that also transforms to uppercase); in other cases, you may simply want to create a very specific 
-name transformation that isn't easily accomplished with other mappers like GlobMapper or RegexpMapper.
+Escrever sua classe mapper para nomes de arquivos permitirá que você controle como os nomes serão transformados 
+nas tasks como CopyTask, MoveTask, XLSTTask, etc. Em alguns casos você pode querer estender mappers existentes 
+(por exemplo, criar um GlobMapper que também transforme em maísculas); em outros caos, você pode simplesmente 
+querer criar uma transformação de nomes bem simples que não é facilmente realizada por outros mappers como 
+GlobMapper ou RegexMapper.
 
-6.8.1 Creating a Mapper
+## Criando um mapper
 
-Writing filename mappers is simplified by interface support in PHP5. Essentially, your custom filename mapper 
-must implement phing.mappers.FileNameMapper. Here's an example of a filename mapper that creates DOS-style 
-file names. For this example, the "to" and "from" attributes are not needed because all files will be transformed. 
-To see the "to" and "from" attributes in action, look at phing.mappers.GlobMapper or phing.mappers.RegexpMapper.
+Escrever mappers para nomes de arquivos foi simplificado pelo suporte a interfaces do PHP5. Basicamente, seu mapper 
+customizado deve implementar phing.mappers.FileNameMapper. Segue um exemplo de um mapper de nomes de arquivos que 
+cria arquivos com nomes no estilo DOS. Para este exemplo, os atributos "to" e "from" não são necessários porque todos 
+os arquivos serão transformados. Para ver os atributos "to" e "from" em ação, de uma olhada em phing.mappers.GlobMapper 
+ou phing.mappers.RegexpMapper.
 
+```php
 require_once "phing/mappers/FileNameMapper.php";
 
 /**
- * A mapper that makes those ugly DOS filenames.
+ * Um mapper que cria aqueles horríveis nomes de arquivo padrão DOS
  */
 class DOSMapper implements FileNameMapper {
 
   /**
-   * The main() method actually performs the mapping.
+   * O método main() realiza o mapeamento.
    *
-   * In this case we transform the $sourceFilename into
-   * a DOS-compatible name.  E.g.
+   * Neste caso nós transformamos $sourceFilename em
+   * um nome DOS-compatível. Por exemplo:
    * ExtendingPhing.html -> EXTENDI~.DOC
    *
-   * @param string $sourceFilename The name to be coverted.
-   * @return array The matched filenames.
+   * @param string $sourceFilename O nome a ser convertido.
+   * @return array Os nomes compatíveis.
    */
   public function main($sourceFilename) {
 
     $info = pathinfo($sourceFilename);
     $ext = $info['extension'];
-    // get basename w/o extension
+    // pega o nome do arquivo sem a extensão
     $bname = preg_replace('/\.\w+\$/', '', $info['basename']);
 
     if (strlen($bname) > 8) {
@@ -58,19 +61,23 @@ class DOSMapper implements FileNameMapper {
   }
 
   /**
-   * The "from" attribute is not needed here, but method must exist.
+   * O atributo "from" não é utilizado, mas o método deve existir.
    */
   public function setFrom($from) {}
 
-     /**
-   * The "from" attribute is not needed here, but method must exist.
+  /**
+   * O atributo "to" não é utilizado, mas o método deve existir.
    */
   public function setTo($to) {}
 
 }
-6.8.2 Using the Mapper
+```
 
-Assuming that this mapper is saved to myapp/mappers/DOSMapper.php (relative to a path on PHP's include_path or 
-in PHP_CLASSPATH env variable), then you would refer to it like this in your build file:
+## Usando o mapper
 
+Assumindo que este mapper esteja salvo em myapp/mappers/DOSMapper.php (relativo a um path no include_path do PHP ou 
+na variável PHP_CLASSPATH do env), então você faria referência a ele dessa maneira no seu arquivo de build: 
+
+```xml
 <mapper classname="myapp.mappers.DOSMapper"/>
+```
