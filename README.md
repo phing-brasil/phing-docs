@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/phing-brasil/phing-docs.svg?branch=master)](https://travis-ci.org/phing-brasil/phing-docs)
+
 # Disclaimer
 
 Phing Brasil is a project to translate the documentation of Phing in Portuguese from Brazil. We aren't related to [Phing official](https://github.com/phingofficial/phing) project. To any issue please report to the official project, here our  goal is just translate the documentation.
