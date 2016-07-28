@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Phing-docs | Arquivos mais complexos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+        
+        <link  rel="stylesheet" href="../styles/normalize.css" /><link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" /><link  rel="stylesheet" href="../styles/stylesheet.css" /><link  rel="stylesheet" href="../styles/github-light.css" />
+    </head>
+    <body>
+        <section class="page-header">
+            <h1 class="project-name">Arquivos mais complexos</h1>
+            <h2 class="project-tagline"></h2>
+            <a href="../" class="btn">Voltar</a>
+        </section>
+        <section class="main-content">
+            <pre><code>&lt;?xml version=&quot;1.0&quot;  encoding=&quot;UTF-8&quot; ?&gt;
+
+&lt;project name=&quot;testsite&quot; basedir=&quot;.&quot; default=&quot;main&quot;&gt;
+    &lt;property file=&quot;./build.properties&quot; /&gt;
+
+    &lt;property name=&quot;package&quot;  value=&quot;${phing.project.name}&quot; override=&quot;true&quot; /&gt;
+    &lt;property name=&quot;builddir&quot; value=&quot;./build/testsite&quot; override=&quot;true&quot; /&gt;
+    &lt;property name=&quot;srcdir&quot;   value=&quot;${project.basedir}&quot; override=&quot;true&quot; /&gt;
+
+    &lt;!-- Fileset for all files --&gt;
+    &lt;fileset dir=&quot;.&quot; id=&quot;allfiles&quot;&gt;
+        &lt;include name=&quot;**&quot; /&gt;
+    &lt;/fileset&gt;
+
+    &lt;!-- ============================================  --&gt;
+    &lt;!-- (DEFAULT) Target: main                        --&gt;
+    &lt;!-- ============================================  --&gt;
+    &lt;target name=&quot;main&quot; description=&quot;main target&quot;&gt;
+        &lt;copy todir=&quot;${builddir}&quot;&gt;
+            &lt;fileset refid=&quot;allfiles&quot; /&gt;
+        &lt;/copy&gt;
+    &lt;/target&gt;
+
+    &lt;!-- ============================================  --&gt;
+    &lt;!-- Target: Rebuild                               --&gt;
+    &lt;!-- ============================================  --&gt;
+    &lt;target name=&quot;rebuild&quot; description=&quot;rebuilds this package&quot;&gt;
+        &lt;delete dir=&quot;${builddir}&quot; /&gt;
+        &lt;phingcall target=&quot;main&quot; /&gt;
+    &lt;/target&gt;
+&lt;/project&gt;
+</code></pre><p>Esse arquivo de configuração primeiramente define algumas propriedades com a tag <strong><code>&lt;property&gt;</code></strong>.
+E então é definido um <strong>fileset</strong> e dois targets. Vamos entrar em detalhes sobre cada item no 
+arquivo XML.</p>
+<p>As primeiras 5 tags definem tags de propriedades. Elas aparecem em duas maneiras:</p>
+<ul>
+<li><p>A segunda propriedade possui apenas um atributo file. O caminho do arquvo 
+informado tem que ser relativo ou absoluto</p>
+</li>
+<li><p>E a outra maneira, a tag possui um atributo name e um atributo value. Após a chamada
+os valores definidos podem ser acesso através da sintaxe <code>&quot;${&quot; and &quot;}&quot;</code>.</p>
+</li>
+</ul>
+<p>A próxima coisa a se notar no arquivo é a tag <strong><code>&lt;fileset&gt;</code></strong>. Essa tag define um 
+conjuntos de arquivos. Você pode incluir ou exclur arquivos com as tags <strong>include</strong> 
+e <strong>exclude</strong>. Para maiores informações sobre fileset veja o apêndice D. O fileset
+utilizado no exemplo possui o atributo id para que seja possível referenciar
+esse fileset posteriormente.</p>
+<p>Uma coisa que devemos nos atentar é ao uso das estrelas duplas <code>&quot;**&quot;</code>. Essa regexp
+especial refere-se a todos os arquivos em todos os subdiretórios. Compare isso com
+apenas uma estrela <code>&quot;*&quot;</code> que refere-se a todos os arquivos no subdiretório atual.
+Por exemplo a expressão <code>&quot;**/*.phps&quot;</code> refere-se a todos os arquivos com o sufixo
+<strong><code>&quot;.phps&quot;</code></strong> em todos os subdiretórios corrente.</p>
+<p>A primeira tarefa possue apenas uma chamada á tarefa <strong>CopyTask</strong> através da tag 
+<strong><code>&lt;copy&gt;</code></strong>. A parte interessante aqui é o que tag copy possui dentro dela. Aqui, 
+a tarefa fileset não é escrita com elementos include ou exclude mas sim o o atributo
+refid, o fileset criado anteriormente é referenciado. Dessa forma você pode utilizar
+varias vezes um fileset que foi definido apenas uma vez.</p>
+<p>A unica coisa notável no segundo target é a chamada da tarefa <strong>PhingTask</strong> com a tag
+<strong><code>&lt;phingcall&gt;</code></strong> (Veja o apêndice B para maiores informações). A tarefa executa um 
+target específico no mesmo arquivo XML. O que irá acontecer é que o segundo target
+irá remover o diretório build e chamar o target main de novo.</p>
+<p>Podemos sobrescrever propriedades definidas no arquivo XML utilizando o argumento -D.
+Por exemplo para sobrescrever o builddir no arquivo XML acima poderiamos chamar o 
+Phing da seguinte forma</p>
+<pre><code>$ phing -Dbuilddir=/tmp/system-test
+</code></pre><h1 id="gerenciando-depend-ncias">Gerenciando dependências</h1>
+<p>Em construção</p>
+
+            <footer class="site-footer">
+                <p>A documentação original sobre essa página você encontra
+                    clicando <a href="https://www.phing.info/docs/stable/hlhtml/index.html#d5e985" target="_blank">aqui</a>
+                </p>
+                <a href="../" class="btn-back">Página inicial</a>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
+            </footer>
+        </section>
+
+        
+    </body>
+</html>

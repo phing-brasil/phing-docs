@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Phing-docs | Usando o Phing</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+        
+        <link  rel="stylesheet" href="../styles/normalize.css" /><link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" /><link  rel="stylesheet" href="../styles/stylesheet.css" /><link  rel="stylesheet" href="../styles/github-light.css" />
+    </head>
+    <body>
+        <section class="page-header">
+            <h1 class="project-name">Usando o Phing</h1>
+            <h2 class="project-tagline"></h2>
+            <a href="../" class="btn">Voltar</a>
+        </section>
+        <section class="main-content">
+            <p>Agora você está preparado para executar o Phing na linha de comando ou através 
+de scripts. O conteúdo a seguir descreve brevemente como executar o Phing
+corretamente</p>
+<h2 id="linha-de-comando">Linha de comando</h2>
+<p>A execução através da linha de comando é fácil. Apenas vá aonde o seu arquivo XML
+está localizado e execute</p>
+<pre><code>$ phing [target [target2 [target3] ...]]
+</code></pre><p>[target ...] são os alvos que você deseja executar. Se nenhum target for especificado
+Phing irá tentar executar o target padrão especificado na tag <strong>project</strong>.</p>
+<pre><code>&lt;!-- Arquivo targets.xml --&gt;
+&lt;project default=&quot;targetPadrao&quot;&gt;
+    &lt;target name=&quot;segundaTarget&quot;&gt;
+        &lt;echo msg=&quot;Segunda target&quot;/&gt;
+    &lt;/target&gt;
+
+    &lt;target name=&quot;targetPadrao&quot;&gt;
+        &lt;echo msg=&quot;Target padrão&quot;/&gt;
+    &lt;/target&gt;
+&lt;/project&gt;
+</code></pre><p>Dado o arquivo XML acima poderiamos executar a target <code>targetPadrao</code> simplesmente executando o Phing</p>
+<pre><code>phing -f targets.xml
+</code></pre><p>Obteriamos o seguinte resultado :</p>
+<pre><code>targetPadrao.xml &gt; targetPadrao:
+
+     [echo] Target padrão
+
+BUILD FINISHED
+
+Total time: 0.1176 seconds
+</code></pre><p>Quando Phing é executado para executar multiplos targets, Phing invocará cada
+target independentemente de outros targets, veja que para fazer isso basta informar o nome dos targets separados por espaço.</p>
+<pre><code>$ phing meuTarget1 meuTarget2
+</code></pre><p>Fazendo um comparativo com o mesmo arquivo XML utilizado anteriormente, podemos executar dois targets da seguinte maneira</p>
+<pre><code>phing -f targetPadrao.xml targetPadrao segundaTarget
+</code></pre><p>E obtemos o seguinte resutado</p>
+<pre><code>targetPadrao.xml &gt; targetPadrao:
+
+     [echo] Target padrão
+
+targetPadrao.xml &gt; segundaTarget:
+
+     [echo] Segunda target
+
+BUILD FINISHED
+
+Total time: 0.0854 seconds
+</code></pre>
+            <footer class="site-footer">
+                <p>A documentação original sobre essa página você encontra
+                    clicando <a href="https://www.phing.info/docs/guide/trunk/ch03s05.html" target="_blank">aqui</a>
+                </p>
+                <a href="../" class="btn-back">Página inicial</a>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
+            </footer>
+        </section>
+
+        
+    </body>
+</html>

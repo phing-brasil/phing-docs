@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Phing-docs | Escrevendo tipos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+        
+        <link  rel="stylesheet" href="../styles/normalize.css" /><link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" /><link  rel="stylesheet" href="../styles/stylesheet.css" /><link  rel="stylesheet" href="../styles/github-light.css" />
+    </head>
+    <body>
+        <section class="page-header">
+            <h1 class="project-name">Escrevendo tipos</h1>
+            <h2 class="project-tagline"></h2>
+            <a href="../" class="btn">Voltar</a>
+        </section>
+        <section class="main-content">
+            <p>Você só deve criar novos tipos se o tipo precisa ser compartilhado com mais de uma task. Se o tipo só é utilizado 
+em uma task específica - por exemplo, manipular um parâmetro ou outra tag necessária para a task - então a classe 
+Type deve ser definida no mesmo arquivo que a task (Por exemplo, phing/filters/XSLTFilter.php também inclui uma 
+classe XSLTParam que não é usada em nenhum outro lugar).</p>
+<p>Para casos onde você precisa de tipos mais genéricos, você pode criar sua própria classe Type - similar ao jeito 
+de ser criar uma task.</p>
+<h2 id="criando-um-tipo-de-dados">Criando um Tipo de dados</h2>
+<p>Classes Type precisam estender a classe abstrata DataType. Além de prover meios de categorizar tipos, a classe 
+DataType provê os métodos necessários para suportar o atributo &quot;refid&quot; (Todos os tipos podem ter um id, e eles 
+podem ser referenciados mais tarde utilizando esse id).</p>
+<p>Nesse exemplo nós criamos um tipo DSN porque nós escrevemos várias tasks relacionadas a banco, e cada uma delas 
+precisa saber como se conectar ao banco; ao invés de ter parâmetros de banco de dados para cada task, vamos criar 
+um tipo DSN para podermos identificar os parâmetros da conexão apenas uma vez e então usá-los em todas as nossas 
+tasks.</p>
+<pre><code class="lang-php">require_once &quot;phing/types/DataType.php&quot;;
+
+/**
+ * Este tipo representa uma conexão de banco de dados
+ */
+class DSN extends DataType {
+
+  private $url;
+  private $username;
+  private $password;
+  private $persistent = false;
+
+  /**
+   * Define a parte da URL: mysql://localhost/mydatabase
+   */
+  public function setUrl($url) {
+    $this-&gt;url = $url;
+  }
+
+  /**
+   * Define o usuário a ser utilizado na conexão
+   */
+  public function setUsername($username) {
+    $this-&gt;username = $username;
+  }
+
+  /**
+   * Define a senha a ser utilizada na conexão
+   */
+  public function setPassword($password) {
+    $this-&gt;password = $password;
+  }
+
+  /**
+   * Define se será utilizada uma conexão persistente
+   * @param boolean $persist
+   */
+  public function setPersistent($persist) {
+    $this-&gt;persistent = (boolean) $persist;
+  }
+
+  public function getUrl(Project $p) {
+    if ($this-&gt;isReference()) {
+      return $this-&gt;getRef($p)-&gt;getUrl($p);
+    }
+    return $this-&gt;url;
+  }
+
+  public function getUsername(Project $p) {
+    if ($this-&gt;isReference()) {
+      return $this-&gt;getRef($p)-&gt;getUsername($p);
+    }
+    return $this-&gt;username;
+  }
+
+  public function getPassword(Project $p) {
+    if ($this-&gt;isReference()) {
+      return $this-&gt;getRef($p)-&gt;getPassword($p);
+    }
+    return $this-&gt;password;
+  }
+
+  public function getPersistent(Project $p) {
+    if ($this-&gt;isReference()) {
+      return $this-&gt;getRef($p)-&gt;getPersistent($p);
+    }
+    return $this-&gt;persistent;
+  }
+
+  /**
+   * Retorna um hash/array combinado para o DSN como o utilizado pelo PEAR.
+   * @return array
+   */
+  public function getPEARDSN(Project $p) {
+    if ($this-&gt;isReference()) {
+      return $this-&gt;getRef($p)-&gt;getPEARDSN($p);
+    }
+
+    include_once &#39;DB.php&#39;;
+    $dsninfo = DB::parseDSN($this-&gt;url);
+    $dsninfo[&#39;username&#39;] = $this-&gt;username;
+    $dsninfo[&#39;password&#39;] = $this-&gt;password;
+    $dsninfo[&#39;persistent&#39;] = $this-&gt;persistent;
+
+    return $dsninfo;
+  }
+
+  /**
+   * Seu tipo deve implementar esta função, que certifica que
+   * não há referências circulares e que as referências são do 
+   * tipo correto(DSN neste exemplo).
+   *
+   * @return DSN
+   */
+  public function getRef(Project $p) {
+    if ( !$this-&gt;checked ) {
+      $stk = array();
+      array_push($stk, $this);
+      $this-&gt;dieOnCircularReference($stk, $p);
+    }
+    $o = $this-&gt;ref-&gt;getReferencedObject($p);
+    if ( !($o instanceof DSN) ) {
+      throw new BuildException($this-&gt;ref-&gt;getRefId().&quot; doesn&#39;t denote a DSN&quot;);
+    } else {
+      return $o;
+    }
+  }
+
+}
+</code></pre>
+<h2 id="usando-o-tipo">Usando o tipo</h2>
+<p>O TypedefTask provê uma maneira de declarar seu tipo para que você possa usá-lo no seu arquivo de build. Neste exemplo 
+está mostrado como você usaria esse tipo para definir um único DSN e usá-lo em múltiplas tasks (É claro que você poderia 
+especificar os parâmetros da conexão DSN todas as vezes, mas as premissas por trás de se ter um tipo é evitar especificar 
+a os parâmetros da conexão para cada task).</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; ?&gt;
+
+&lt;project name=&quot;test&quot; basedir=&quot;.&quot;&gt;
+
+  &lt;typedef name=&quot;dsn&quot; classname=&quot;myapp.types.DSN&quot; /&gt;
+
+  &lt;dsn
+      id=&quot;maindsn&quot;
+      url=&quot;mysql://localhost/mydatabase&quot;
+      username=&quot;root&quot;
+      password=&quot;&quot;
+      persistent=&quot;false&quot; /&gt;
+
+  &lt;target name=&quot;main&quot;&gt;
+
+    &lt;my-special-db-task&gt;
+         &lt;dsn refid=&quot;maindsn&quot;/&gt;
+    &lt;/my-special-db-task&gt;
+
+    &lt;my-other-db-task&gt;
+      &lt;dsn refid=&quot;maindsn&quot;/&gt;
+    &lt;/my-other-db-task&gt;
+
+  &lt;/target&gt;
+
+&lt;/project&gt;
+</code></pre>
+<h2 id="discuss-o-do-c-digo">Discussão do Código</h2>
+<h3 id="getters-e-setters">Getters e Setters</h3>
+<p>Você deve prover um método seter para cada atributo que você quiser passar no seu arquivo de build. É uma 
+boa prática também definir um método getter, mas na prática você decide como suas tasks irão usar seu tipo.
+No exemplo acima nós definimos um método getter para cada atributo e também definimos um método getter adicional: 
+DSN::getPEARDSN() que retorna o hash DSN para ser utilizado pelo PEAR::DB, PEAR::MDB e Creole. Dependendo da 
+necessidade da task, nós podemos definir apenas o método getPEARDSN() ao invés de definir um método para cada 
+atributo.</p>
+<p>Também é importante notar que o método getter deve checar se o tipo atual é uma referência a um tipo previamente 
+definido - o método DataType::isReference() serve para este propósito. Por isso, o método getter deve ser chamado 
+no projeto atual, porque as referências são relativas a um projeto.</p>
+<h3 id="o-m-todo-getref-">O método getRef()</h3>
+<p>O método getRef() precisa ser implementado no seu tipo. Este método é responsável por retornar um objeto referenciado; 
+ele precisa se certificar que o objeto referenciado é do tipo correto (por exemplo, você pode tentar referenciar uma 
+RegularExpression a partir de um tipo DSN) e que a referência não é circular.</p>
+<p>Você pode provavelmente copiar este método a partir de um tipo existente e fazer algumas modificações para 
+customizá-lo para o seu tipo.</p>
+
+            <footer class="site-footer">
+                <p>A documentação original sobre essa página você encontra
+                    clicando <a href="https://www.phing.info/docs/stable/hlhtml/index.html#d5e1976" target="_blank">aqui</a>
+                </p>
+                <a href="../" class="btn-back">Página inicial</a>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
+            </footer>
+        </section>
+
+        
+    </body>
+</html>

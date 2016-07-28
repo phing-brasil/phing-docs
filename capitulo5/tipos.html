@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Phing-docs | Tipos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+        
+        <link  rel="stylesheet" href="../styles/normalize.css" /><link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" /><link  rel="stylesheet" href="../styles/stylesheet.css" /><link  rel="stylesheet" href="../styles/github-light.css" />
+    </head>
+    <body>
+        <section class="page-header">
+            <h1 class="project-name">Tipos</h1>
+            <h2 class="project-tagline"></h2>
+            <a href="../" class="btn">Voltar</a>
+        </section>
+        <section class="main-content">
+            <p>Existem os tipos básicos (strings, inteiros, boolean) que você pode utilizar como parâmetro em uma task. Mas também 
+existem tipos complexos que são utilizados através de tags aninhados (tags dentro de outra tag)</p>
+<pre><code class="lang-xml">&lt;task&gt;
+  &lt;tipo /&gt;
+&lt;/task&gt;
+
+&lt;!-- ou: --&gt;
+
+&lt;task&gt;
+  &lt;tipo&gt;
+    &lt;subtipo&gt;
+      &lt;!-- etc. --&gt;
+    &lt;/subtipo&gt;
+  &lt;/tipo&gt;
+&lt;/task&gt;
+</code></pre>
+<p>Note que os tipos podem obter mais de um nível de aninhamento, como mostra o segundo exemplo acima</p>
+<h2 id="referenciando-tipos">Referenciando tipos</h2>
+<p>Uma caracteristica se notar é a possibilidade de referênciar tipos através dos ids, após a definição do mesmo em algum lugar do seu arquivo XML. Veja o nosso exemplo :</p>
+<pre><code>&lt;project&gt;
+
+  &lt;!-- Define o tipo foo para ser usado posteriormente --&gt;
+  &lt;fileset id=&quot;foo&quot;&gt;
+    &lt;include name=&quot;*.php&quot; /&gt;
+  &lt;/fileset&gt;
+
+  &lt;!-- Target que utiliza o tipo foo --&gt;
+  &lt;target name=&quot;copy&quot; &gt;
+    &lt;copy todir=&quot;/tmp&quot;&gt;
+      &lt;fileset refid=&quot;foo&quot; /&gt;
+    &lt;/copy&gt;
+  &lt;/target&gt;
+&lt;/project&gt;
+</code></pre><p>Como você pode ver, o tipo contém um atributo id e é esse atributo que é utilizado para se referenciar ao tipo criado. No exemplo acima temos a uma tarefa que realiza a cópia de todos os arquivos com a extensão <strong>.php</strong> para o diretório <strong>/tmp</strong>. Veja que o tipo é criado através da tag <code>&lt;fileset&gt;</code> e é dado o atributo id o valor <strong>foo</strong>.</p>
+<p>Logo em seguida no target <strong>copy</strong> temos a tarefa <strong>copy</strong> que efetivamente irá copiar os arquivos, repare que dessa vez apenas referenciamos os arquivos criados anteriormente através do atributo <strong>refid</strong>.</p>
+
+            <footer class="site-footer">
+                <p>A documentação original sobre essa página você encontra
+                    clicando <a href="https://www.phing.info/docs/stable/hlhtml/index.html#sec.types" target="_blank">aqui</a>
+                </p>
+                <a href="../" class="btn-back">Página inicial</a>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
+            </footer>
+        </section>
+
+        
+    </body>
+</html>

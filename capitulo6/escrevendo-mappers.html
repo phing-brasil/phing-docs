@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Phing-docs | Escrevendo mappers</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+        
+        <link  rel="stylesheet" href="../styles/normalize.css" /><link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" /><link  rel="stylesheet" href="../styles/stylesheet.css" /><link  rel="stylesheet" href="../styles/github-light.css" />
+    </head>
+    <body>
+        <section class="page-header">
+            <h1 class="project-name">Escrevendo mappers</h1>
+            <h2 class="project-tagline"></h2>
+            <a href="../" class="btn">Voltar</a>
+        </section>
+        <section class="main-content">
+            <p>Escrever sua classe mapper para nomes de arquivos permitirá que você controle como os nomes serão transformados 
+nas tasks como CopyTask, MoveTask, XLSTTask, etc. Em alguns casos você pode querer estender mappers existentes 
+(por exemplo, criar um GlobMapper que também transforme em maísculas); em outros caos, você pode simplesmente 
+querer criar uma transformação de nomes bem simples que não é facilmente realizada por outros mappers como 
+GlobMapper ou RegexMapper.</p>
+<h2 id="criando-um-mapper">Criando um mapper</h2>
+<p>Escrever mappers para nomes de arquivos foi simplificado pelo suporte a interfaces do PHP5. Basicamente, seu mapper 
+customizado deve implementar phing.mappers.FileNameMapper. Segue um exemplo de um mapper de nomes de arquivos que 
+cria arquivos com nomes no estilo DOS. Para este exemplo, os atributos &quot;to&quot; e &quot;from&quot; não são necessários porque todos 
+os arquivos serão transformados. Para ver os atributos &quot;to&quot; e &quot;from&quot; em ação, de uma olhada em phing.mappers.GlobMapper 
+ou phing.mappers.RegexpMapper.</p>
+<pre><code class="lang-php">require_once &quot;phing/mappers/FileNameMapper.php&quot;;
+
+/**
+ * Um mapper que cria aqueles horríveis nomes de arquivo padrão DOS
+ */
+class DOSMapper implements FileNameMapper {
+
+  /**
+   * O método main() realiza o mapeamento.
+   *
+   * Neste caso nós transformamos $sourceFilename em
+   * um nome DOS-compatível. Por exemplo:
+   * ExtendingPhing.html -&gt; EXTENDI~.DOC
+   *
+   * @param string $sourceFilename O nome a ser convertido.
+   * @return array Os nomes compatíveis.
+   */
+  public function main($sourceFilename) {
+
+    $info = pathinfo($sourceFilename);
+    $ext = $info[&#39;extension&#39;];
+    // pega o nome do arquivo sem a extensão
+    $bname = preg_replace(&#39;/\.\w+\$/&#39;, &#39;&#39;, $info[&#39;basename&#39;]);
+
+    if (strlen($bname) &gt; 8) {
+      $bname = substr($bname,0,7) . &#39;~&#39;;
+    }
+
+    if (strlen($ext) &gt; 3) {
+      $ext = substr($bname,0,3);
+    }
+
+    if (!empty($ext)) {
+      $res = $bname . &#39;.&#39; . $ext;
+    } else {
+      $res = $bname;
+    }
+
+    return (array) strtoupper($res);
+  }
+
+  /**
+   * O atributo &quot;from&quot; não é utilizado, mas o método deve existir.
+   */
+  public function setFrom($from) {}
+
+  /**
+   * O atributo &quot;to&quot; não é utilizado, mas o método deve existir.
+   */
+  public function setTo($to) {}
+
+}
+</code></pre>
+<h2 id="usando-o-mapper">Usando o mapper</h2>
+<p>Assumindo que este mapper esteja salvo em myapp/mappers/DOSMapper.php (relativo a um path no include_path do PHP ou 
+na variável PHP_CLASSPATH do env), então você faria referência a ele dessa maneira no seu arquivo de build: </p>
+<pre><code class="lang-xml">&lt;mapper classname=&quot;myapp.mappers.DOSMapper&quot;/&gt;
+</code></pre>
+
+            <footer class="site-footer">
+                <p>A documentação original sobre essa página você encontra
+                    clicando <a href="https://www.phing.info/docs/stable/hlhtml/index.html#d5e2009" target="_blank">aqui</a>
+                </p>
+                <a href="../" class="btn-back">Página inicial</a>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
+            </footer>
+        </section>
+
+        
+    </body>
+</html>

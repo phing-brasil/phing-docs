@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Phing-docs | Targets</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+        
+        <link  rel="stylesheet" href="../styles/normalize.css" /><link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" /><link  rel="stylesheet" href="../styles/stylesheet.css" /><link  rel="stylesheet" href="../styles/github-light.css" />
+    </head>
+    <body>
+        <section class="page-header">
+            <h1 class="project-name">Targets</h1>
+            <h2 class="project-tagline"></h2>
+            <a href="../" class="btn">Voltar</a>
+        </section>
+        <section class="main-content">
+            <p>Targets são coleções de componenetes do projeto (mas não outros targets) que são
+utilizados com um nome único no projeto. Um target geralmente realiza uma tarefa
+específica -- ou invoca outros targets que invocam tarefas especificas -- entretanto
+um target é como se parece com uma função (porém um target não possue um valor
+de retorno).</p>
+<p>Targets provavelmente dependeram de outros targets. Por exemplo, se um target A
+depende de um target B, então target A é invocado, mas o target B irá ser executado
+primeiro. Phing automaticamente resolve essas dependências. Você não pode
+ter referências circulares como por exemplo : target A depende do target B e
+o target B depende do target A.</p>
+<p>O código abaixo mostra a utilização de targets</p>
+<pre><code>&lt;target name=&quot;outraTarefa&quot; depends=&quot;construirPagina&quot; description=&quot;Qualquer coisa&quot;&gt;
+  &lt;!-- Tarefas são invocadas aqui --&gt;
+&lt;target&gt;
+
+&lt;target name=&quot;construirPagina&quot; description=&quot;Alguma descrição&quot;&gt;
+  &lt;!-- Tarefas são invocadas aqui --&gt;
+&lt;target&gt;
+</code></pre>
+            <footer class="site-footer">
+                <p>A documentação original sobre essa página você encontra
+                    clicando <a href="https://www.phing.info/docs/stable/hlhtml/index.html#d5e1114" target="_blank">aqui</a>
+                </p>
+                <a href="../" class="btn-back">Página inicial</a>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
+            </footer>
+        </section>
+
+        
+    </body>
+</html>

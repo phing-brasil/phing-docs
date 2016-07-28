@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Phing-docs | Inicialização do Sistema</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+        
+        <link  rel="stylesheet" href="../styles/normalize.css" /><link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" /><link  rel="stylesheet" href="../styles/stylesheet.css" /><link  rel="stylesheet" href="../styles/github-light.css" />
+    </head>
+    <body>
+        <section class="page-header">
+            <h1 class="project-name">Inicialização do Sistema</h1>
+            <h2 class="project-tagline"></h2>
+            <a href="../" class="btn">Voltar</a>
+        </section>
+        <section class="main-content">
+            <p>Instalações PHP são geralmente customizadas - por exemplo, diferentes limites de memória, valores de timeout, etc. A 
+primeira coisa que o Phing faz é modificar os valores do <strong>PHP INI</strong> para criar um ambiente PHP padrão. Isto é executado pela 
+camada de inicialização do Phing, que usa um procedimento de inicialização de três níveis. Basicamente, executando três 
+arquivos:</p>
+<ul>
+<li>Script específico para a plataforma na pasta bin/</li>
+<li>Aplicação principal na pasta bin/</li>
+<li>Classe Phing na pasta classes/phing/</li>
+</ul>
+<p>Em uma primeira análise pode parecer desnecessário. Por que três níveis de inicialização? A razão principal por essa divisão é 
+porque o Phing foi construído para que outros frontends (PHP-GTK, por exemplo) pudessem ser usados no lugar da linha de 
+comando.</p>
+<h2 id="scripts-empacotados">Scripts empacotados</h2>
+<p>Estes scrips tecnicamente não são obrigatórios, mas são disponibilizados para facilitar o uso. Imagine se você tivesse que 
+digitar isso toda vez que você quisesse fazer o build do projeto: </p>
+<p><code>php -qC /path/to/phing/bin/phing.php -verbose all distro snapshot</code></p>
+<p>De fato não parece muito elegante. Além disso, se você não definiu todas as suas variáveis de ambiente, estes scripts podem 
+adivinhar os valores corretos para você. Ainda assim, você deveria definí-las sempre.</p>
+<p>Os scripts dependem da plataforma, então você encontrará <strong>scripts shell</strong> para plataformas Unix (sh) assim como os scripts 
+batch para a plataforma Windows. Se você definir seu path corretamente você poderá chamar o Phing de qualquer lugar do 
+seu sistema com o seguinte comando (referindo ao exemplo acima):</p>
+<p><code>phing -v2 all distro</code></p>
+<h2 id="a-aplica-o-principal-phing-php-">A aplicação principal (phing.php)</h2>
+<p>Basicamente chama classe Phing que executa toda a lógica para voce. Se você olhar o código fonte do arquivo phing.php, 
+você verá que toda a inicialização é feita na classe Phing. O phing.php é simplesmente um arquivo para permitir a chamada do 
+Phing na linha de comando.</p>
+<h2 id="a-classe-phing">A classe Phing</h2>
+<p>Uma vez que todos os passos anteriores da inicialização foram executados com sucesso, a classe Phing é incluída e a 
+inicialização, <strong>Phing::startup()</strong>, é chamada pelo script principal da aplicação. Ela define os componentes do sistema, 
+configurações INI, PEAR e algumas outras coisas. O processo de inicialização detalhado é o seguinte: </p>
+<ul>
+<li>Inicialização do temporizador</li>
+<li>Definição das constantes do sistema</li>
+<li>Definição das configurações INI</li>
+<li>Definição dos caminhos de inclusão</li>
+</ul>
+<p>Depois que a aplicação principal completa todas as operações (com sucesso ou não) ela chama 
+<strong>Phing::shutdown</strong>(CODIGO_DE_SAIDA), que cuida da destruição correta de todos os objetos e do encerramento correto do 
+sistema, retornando um código de saída para utilização do shell.</p>
+
+            <footer class="site-footer">
+                <p>A documentação original sobre essa página você encontra
+                    clicando <a href="https://www.phing.info/docs/stable/hlhtml/index.html#d5e1778" target="_blank">aqui</a>
+                </p>
+                <a href="../" class="btn-back">Página inicial</a>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
+            </footer>
+        </section>
+
+        
+    </body>
+</html>

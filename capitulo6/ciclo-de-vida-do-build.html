@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Phing-docs | Ciclo de vida do build</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+        
+        <link  rel="stylesheet" href="../styles/normalize.css" /><link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" /><link  rel="stylesheet" href="../styles/stylesheet.css" /><link  rel="stylesheet" href="../styles/github-light.css" />
+    </head>
+    <body>
+        <section class="page-header">
+            <h1 class="project-name">Ciclo de vida do build</h1>
+            <h2 class="project-tagline"></h2>
+            <a href="../" class="btn">Voltar</a>
+        </section>
+        <section class="main-content">
+            <p>Esta seção existe para explicar - ou tentar - como o Phing &quot;funciona&quot;. Particularmente,como o Phing processa o arquivo build e 
+invoca tasks e tipos baseado nas tags que ele encontra.</p>
+<h2 id="como-o-phing-interpreta-os-arquivos-de-build">Como o Phing interpreta os arquivos de build</h2>
+<p>O Phing usa uma classe ExpatParser e funções nativas do PHP para interpretação de XML para manipular os arquivos de 
+build. Todas as classes de manipulação estendem a classe phing.parser.AbstractHandler. Estas classes manipulam as tags 
+que são encontradas no arquivo de build.</p>
+<p>Tasks principais e tipos são mapeados para tags XML nos arquivos defaults.properties - especificamente 
+phing/tasks/defaults.properties e phing/types/defaults.properties.</p>
+<p>Basicamente, funciona assim:</p>
+<ol>
+<li><p>phing.parser.RootHandler é registrado para manipular o documento XML de build.</p>
+</li>
+<li><p>RootHanlder espera encontrar exatamente um elemento: <project>. Ele invoca o ProjectHandler com os atributos da 
+tag <project> ou retorna uma exceção se <project> não for encontrado ou se alguma coisa for encontrada em seu lugar.</p>
+</li>
+<li><p>ProjectHandler espera encontrar tags <target>; para elas ele invoca o TargetHandler. Ela também tem exceções para 
+manipular certas tarefas que podem ser executadas com prioridade: <resolve>, <taskdef>, <typedef>, e <property>; 
+para estas ele invoca a classe TaskHandler. Se uma tag apresentada não corresponde às tags esperadas, ele assume 
+que ela é um tipo e invoca a classeDataTypeHandler.</p>
+</li>
+<li><p>TargetHandler espera que todas as tags sejam tarefas ou tipos e invoca o manipulador apropriado (baseado no 
+mapeamento especificado nos arquivos defaults.properties).</p>
+</li>
+<li><p>Tasks and tipos podem ter elementos aninhados, mas somente se eles corresponderem a um método create*() na classe 
+de tarefa ou tipo. Por exemplo, uma tag aninhada <param> pode corresponder a um método createParam() da task ou do tipo.</p>
+</li>
+</ol>
+
+            <footer class="site-footer">
+                <p>A documentação original sobre essa página você encontra
+                    clicando <a href="https://www.phing.info/docs/stable/hlhtml/index.html#d5e1824" target="_blank">aqui</a>
+                </p>
+                <a href="../" class="btn-back">Página inicial</a>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
+            </footer>
+        </section>
+
+        
+    </body>
+</html>

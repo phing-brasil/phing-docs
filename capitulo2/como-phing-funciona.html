@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Phing-docs | Como Phing funciona?</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+        
+        <link  rel="stylesheet" href="../styles/normalize.css" /><link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" /><link  rel="stylesheet" href="../styles/stylesheet.css" /><link  rel="stylesheet" href="../styles/github-light.css" />
+    </head>
+    <body>
+        <section class="page-header">
+            <h1 class="project-name">Como Phing funciona?</h1>
+            <h2 class="project-tagline"></h2>
+            <a href="../" class="btn">Voltar</a>
+        </section>
+        <section class="main-content">
+            <p>Phing usa arquivos XML que contêm uma descrição das tarefas a serem executadas. 
+O arquivo está estruturado em targets (alvos) que contêm os comandos reais para 
+serem executados (por exemplo, o comando para copiar um arquivo, deletar um diretório, 
+executar uma consulta ao DB, etc.). </p>
+<p>Assim, para usar Phing, você deve escrever seu primeiro arquivo e, 
+em seguida, executar o Phing, especificando o alvo em seu arquivo que você 
+deseja executar.</p>
+<p><code>phing -f meu_arquivo.xml meu_target</code></p>
+<p>Por padrão Phing irá procurar um arquivo chamado <strong>build.xml</strong> (assim você não precisa
+especificar o nome do arquivo a não ser que não seja build.xml) e se nenhum target
+é especificado Phing irá tentar executar o target padrão, especificado na tag <project>.</p>
+<p>Targets podem possuir dependências. Elas podem depender de outros targets ou de 
+outros arquivo.</p>
+
+            <footer class="site-footer">
+                <p>A documentação original sobre essa página você encontra
+                    clicando <a href="" target="_blank">aqui</a>
+                </p>
+                <a href="../" class="btn-back">Página inicial</a>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
+            </footer>
+        </section>
+
+        
+    </body>
+</html>

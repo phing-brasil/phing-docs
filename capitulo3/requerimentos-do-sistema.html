@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Phing-docs | Requerimentos do sistema</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+        
+        <link  rel="stylesheet" href="../styles/normalize.css" /><link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" /><link  rel="stylesheet" href="../styles/stylesheet.css" /><link  rel="stylesheet" href="../styles/github-light.css" />
+    </head>
+    <body>
+        <section class="page-header">
+            <h1 class="project-name">Requerimentos do sistema</h1>
+            <h2 class="project-tagline"></h2>
+            <a href="../" class="btn">Voltar</a>
+        </section>
+        <section class="main-content">
+            <p>Para utilizar o Phing você precisa ter instalado o PHP 5.2 ou acima compilado
+com <strong>--with-libxml2</strong> e <strong>--with-xsl</strong> se você quiser utilizar funcionalidades
+avançadas</p>
+<h2 id="sistema-operacional">Sistema operacional</h2>
+<p>Desenhado para portabilidade, Phing roda em todas as plataformas que rodam PHP.
+Entretanto algumas funcionalidades avançadas poderam não funcionar normalmente ou
+serão simplesmente ignoradas em algumas plataformas (como por exemplo chmod na 
+plataforma Windows)</p>
+<p>Para evitar problemas com o Phing, é recomendado utilizar uma plataforma baseada
+em Unix. Como por exemplo Linux, FreeBSD, OpenBSD, etc.</p>
+<h2 id="depend-ncias-de-software">Dependências de software</h2>
+<table>
+<thead>
+<tr>
+<th>Software</th>
+<th>Necessário para</th>
+<th>Fonte</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PHP 5.2+</td>
+<td>Execução</td>
+<td><a href="http://www.php.net">http://www.php.net</a></td>
+</tr>
+<tr>
+<td>PHPUnit 3.6.0+</td>
+<td>Opcional; habilita tarefas adicionais</td>
+<td><a href="http://www.phpunit.de">http://www.phpunit.de</a></td>
+</tr>
+<tr>
+<td>Xdebug 2.0.5+</td>
+<td>Opcional; habilita tarefas adicionais</td>
+<td><a href="http://www.xdebug.org">http://www.xdebug.org</a></td>
+</tr>
+<tr>
+<td>SimpleTest 1.0.1</td>
+<td>beta+    Opcional; habilita tarefas adicionais</td>
+<td><a href="http://simpletest.sourceforge.net">http://simpletest.sourceforge.net</a></td>
+</tr>
+<tr>
+<td>phpDocumentor 2.0.0b7+ (PEAR package)</td>
+<td>Opcional; habilita tarefas adicionais</td>
+<td><a href="http://pear.phpdoc.org">http://pear.phpdoc.org</a></td>
+</tr>
+<tr>
+<td>VersionControl_SVN (PEAR package)</td>
+<td>Opcional; habilita tarefas adicionais</td>
+<td><a href="http://pear.php.net/package/VersionControl_SVN">http://pear.php.net/package/VersionControl_SVN</a></td>
+</tr>
+<tr>
+<td>VersionControl_Git (PEAR package)</td>
+<td>Opcional; habilita tarefas adicionais</td>
+<td><a href="http://pear.php.net/package/VersionControl_Git">http://pear.php.net/package/VersionControl_Git</a></td>
+</tr>
+<tr>
+<td>PHP_CodeSniffer (PEAR package)</td>
+<td>Opcional; habilita tarefas adicionais</td>
+<td><a href="http://pear.php.net/package/PHP_CodeSniffer">http://pear.php.net/package/PHP_CodeSniffer</a></td>
+</tr>
+<tr>
+<td>Archive_Tar (PEAR package)</td>
+<td>Opcional; habilita tarefas adicionais</td>
+<td><a href="http://pear.php.net/package/Archive_Tar">http://pear.php.net/package/Archive_Tar</a></td>
+</tr>
+<tr>
+<td>Services_Amazon_S3 (PEAR package)</td>
+<td>Opcional; habilita tarefas adicionais</td>
+<td><a href="http://pear.php.net/package/Services_Amazon_S3">http://pear.php.net/package/Services_Amazon_S3</a></td>
+</tr>
+<tr>
+<td>HTTP_Request2 (PEAR package)</td>
+<td>Opcional; habilita tarefas adicionais</td>
+<td><a href="http://pear.php.net/package/HTTP_Request2">http://pear.php.net/package/HTTP_Request2</a></td>
+</tr>
+<tr>
+<td>PHP Depend</td>
+<td>Opcional; habilita tarefas adicionais</td>
+<td><a href="http://www.pdepend.org">http://www.pdepend.org</a></td>
+</tr>
+<tr>
+<td>PHP Mess Detector</td>
+<td>Opcional; habilita tarefas adicionais</td>
+<td><a href="http://www.phpmd.org">http://www.phpmd.org</a></td>
+</tr>
+<tr>
+<td>PHP Copy/Paste Detector</td>
+<td>Opcional; habilita tarefas adicionais</td>
+<td><a href="http://pear.phpunit.de">http://pear.phpunit.de</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="aten-o">Atenção</h2>
+<p>Phing não funciona com o modo seguro habilitado no PHP!</p>
+
+            <footer class="site-footer">
+                <p>A documentação original sobre essa página você encontra
+                    clicando <a href="https://www.phing.info/docs/stable/hlhtml/index.html#d5e597" target="_blank">aqui</a>
+                </p>
+                <a href="../" class="btn-back">Página inicial</a>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
+            </footer>
+        </section>
+
+        
+    </body>
+</html>

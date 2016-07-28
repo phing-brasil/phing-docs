@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Phing-docs | Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+        
+        <link  rel="stylesheet" href="../styles/normalize.css" /><link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" /><link  rel="stylesheet" href="../styles/stylesheet.css" /><link  rel="stylesheet" href="../styles/github-light.css" />
+    </head>
+    <body>
+        <section class="page-header">
+            <h1 class="project-name">Project</h1>
+            <h2 class="project-tagline"></h2>
+            <a href="../" class="btn">Voltar</a>
+        </section>
+        <section class="main-content">
+            <p>O objetivo desse capítulo é fazer você se familiarizar com os componentes básicos
+de um arquivo XML utilizado pelo Phing. Após ler esse capítulo você poderá entender
+a estrutura básica de qualquer arquivo XML que o Phing utiliza até mesmo se você
+não souber o que os pedaços individuais fazem.</p>
+<h2 id="project">Project</h2>
+<p>Na estrutura do arquivo XML deve exsitir exatamente uma única tag <strong>project</strong>
+definida. <strong><code>&lt;project&gt;</code></strong> é o elemento raiz do arquivo, o que significa que
+todos os componentes devem estar dentro da tag <strong><code>&lt;project&gt;</code></strong></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+
+&lt;project name=&quot;teste&quot; description=&quot;Arquivo simples de teste&quot; default=&quot;main&quot; &gt;
+  &lt;!-- Outros elementos --&gt;
+&lt;project&gt;
+</code></pre><p>O exemplo acima nos mostra a tag project que possui todos atributos utilizados
+por essa tag. O atributo <strong><em>name</em></strong> e <strong><em>description</em></strong> eles se explicam
+apenas pelo nome, o atributo <strong><em>default</em></strong> especifica o target a ser executado 
+se nenhum target for informado.</p>
+<p>A partir da versão 2.4.2 é possível utilizar o atributo <em>phingVersion</em> na tag
+<strong><code>&lt;project&gt;</code></strong>. Esse atributo permite definir qual a versão mínima do Phing
+para executar o arquivo XML para prevenir problemas de compatibilidades.</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+
+&lt;project name=&quot;teste&quot; phingVersion=&quot;2.4.2&quot; &gt;
+  &lt;!-- Outros elementos --&gt;
+&lt;project&gt;
+</code></pre><h2 id="componentes-do-projeto-em-geral">Componentes do projeto em geral</h2>
+<p>Todos os elementos dentro da tag project são considerados componenetes de projeto
+como por exemplo targets, tasks, types, etc. Os componentes do projeto podem
+ter atributos e tags. Atributos possuem apenas valores simples como por exemplo
+strings, inteiros etc. Elementos aninhados podem ser tipos complexos do Phing
+como <strong>FileSets</strong> ou apenas classes simples para valores com chaves customizadas.</p>
+
+            <footer class="site-footer">
+                <p>A documentação original sobre essa página você encontra
+                    clicando <a href="https://www.phing.info/docs/stable/hlhtml/index.html#d5e1084" target="_blank">aqui</a>
+                </p>
+                <a href="../" class="btn-back">Página inicial</a>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
+            </footer>
+        </section>
+
+        
+    </body>
+</html>

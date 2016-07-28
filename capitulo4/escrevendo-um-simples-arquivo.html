@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Phing-docs | Escrevendo um simples arquivo XML</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+        
+        <link  rel="stylesheet" href="../styles/normalize.css" /><link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" /><link  rel="stylesheet" href="../styles/stylesheet.css" /><link  rel="stylesheet" href="../styles/github-light.css" />
+    </head>
+    <body>
+        <section class="page-header">
+            <h1 class="project-name">Escrevendo um simples arquivo XML</h1>
+            <h2 class="project-tagline"></h2>
+            <a href="../" class="btn">Voltar</a>
+        </section>
+        <section class="main-content">
+            <pre><code>&lt;project name=&quot;FooBar&quot; default=&quot;dist&quot;&gt;
+
+    &lt;!-- ============================================  --&gt;
+    &lt;!-- Target: prepare                               --&gt;
+    &lt;!-- ============================================  --&gt;
+    &lt;target name=&quot;prepare&quot;&gt;
+        &lt;echo msg=&quot;Criando o diretório ./build&quot; /&gt;
+        &lt;mkdir dir=&quot;./build&quot; /&gt;
+    &lt;/target&gt;
+
+    &lt;!-- ============================================  --&gt;
+    &lt;!-- Target: build                                 --&gt;
+    &lt;!-- ============================================  --&gt;
+    &lt;target name=&quot;build&quot; depends=&quot;prepare&quot;&gt;
+        &lt;echo msg=&quot;Copiando arquivos para o diretório build...&quot; /&gt;
+
+        &lt;echo msg=&quot;Copiando ./about.php para o diretório ./build...&quot; /&gt;
+        &lt;copy file=&quot;./about.php&quot; tofile=&quot;./build/about.php&quot; /&gt;
+
+        &lt;echo msg=&quot;Copiando ./browsers.php para o diretório ./build...&quot; /&gt;
+        &lt;copy file=&quot;./browsers.php&quot; tofile=&quot;./build/browsers.php&quot; /&gt;
+
+        &lt;echo msg=&quot;Copiando ./contact.php para o diretório ./build...&quot; /&gt;
+        &lt;copy file=&quot;./contact.php&quot; tofile=&quot;./build/contact.php&quot; /&gt;
+    &lt;/target&gt;
+
+    &lt;!-- ============================================  --&gt;
+    &lt;!-- (DEFAULT)  Target: dist                       --&gt;
+    &lt;!-- ============================================  --&gt;
+    &lt;target name=&quot;dist&quot; depends=&quot;build&quot;&gt;
+        &lt;echo msg=&quot;Criando arquivo...&quot; /&gt;
+
+        &lt;tar destfile=&quot;./build/build.tar.gz&quot; compression=&quot;gzip&quot;&gt;
+            &lt;fileset dir=&quot;./build&quot;&gt;
+                &lt;include name=&quot;*&quot; /&gt;
+            &lt;/fileset&gt;
+        &lt;/tar&gt;
+
+        &lt;echo msg=&quot;Arquivos copiados e comprimidos no diretório build!&quot; /&gt;
+    &lt;/target&gt;
+&lt;/project&gt;
+</code></pre><p>O arquivo que utilizamos com o Phing normamente é salvo com o nome build.xml,
+que é o nome pdrão pelo qual o Phing irá procurar se nenhum outro nome de arquivo for
+especificado.</p>
+<p>Para executar o arquivo acima e executar o target padrão (assumindo que o 
+arquivo está no diretório atual com o nome padrão build.xml) basta chamar:</p>
+<pre><code>$ phing
+</code></pre><p>O comando a cima irá executar a target especificada no atributo <strong>dist</strong> da tag
+<strong><project></strong>. Enquanto o arquivo é executado cada tarefa irá exibir alguma 
+informação sobre quais ações e quais arquivos foram afetados.</p>
+<p>Para executar qualquer target que não seja a padrão informado no atributo <strong>dist</strong>
+basta informar o nome do target na linha de comando ao executar o Phing.
+Por exemplo para executar o target chamado <strong>build</strong> você deverá executar o
+comando </p>
+<pre><code>$ phing build
+</code></pre><h2 id="elemento-project-">Elemento <strong>project</strong></h2>
+<p>O primeiro elemento depois do prólogo do documento é o elemento raiz <strong>&lt; project&gt;</strong>.
+Esse elemento é um container para todos os outros elementos e pode/deve ter os 
+seguintes atributos:</p>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Descrição</th>
+<th>Obrigatório</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>O nome do projeto</td>
+<td>Não</td>
+</tr>
+<tr>
+<td>basedir</td>
+<td>O diretório base do projeto, use &quot;.&quot; para referenciar o diretório atual. Atenção: se nenhum diretório for especificado, o diretório pai do arquivo build.xml é utilizado</td>
+<td>Não</td>
+</tr>
+<tr>
+<td>default</td>
+<td>O target padrão a ser executado se nenhum target for especificado</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>description</td>
+<td>A descrição do projeto</td>
+<td>Não</td>
+</tr>
+</tbody>
+</table>
+<h2 id="elemento-target-">Elemento <strong>target</strong></h2>
+<p>Um target pode depender de outros targets. Você pode ter um target para instalar
+os arquivos,por exemplo, e um target para criar um arquivi tar.gz para ser distribuido.
+Você só pode criar um arquivo para distribuir após ter instalado os arquivos primeiro,
+então o target de distribuição depende do target de instalação. E o Phing resolve
+essas dependências.</p>
+
+            <footer class="site-footer">
+                <p>A documentação original sobre essa página você encontra
+                    clicando <a href="https://www.phing.info/docs/guide/trunk/ch04s02.html" target="_blank">aqui</a>
+                </p>
+                <a href="../" class="btn-back">Página inicial</a>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
+            </footer>
+        </section>
+
+        
+    </body>
+</html>

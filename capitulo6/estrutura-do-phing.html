@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Phing-docs | Estrutura do Phing</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+        
+        <link  rel="stylesheet" href="../styles/normalize.css" /><link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" /><link  rel="stylesheet" href="../styles/stylesheet.css" /><link  rel="stylesheet" href="../styles/github-light.css" />
+    </head>
+    <body>
+        <section class="page-header">
+            <h1 class="project-name">Estrutura do Phing</h1>
+            <h2 class="project-tagline"></h2>
+            <a href="../" class="btn">Voltar</a>
+        </section>
+        <section class="main-content">
+            <h2 id="arquivos-e-diret-rios">Arquivos e diretórios</h2>
+<p>Antes de começar a estender o Phing, vamos dar uma olhada na sua estrutura. Você deve se familiarizar com a organização 
+de arquivos na estrutura de diretórios do Phing antes de começar a codificar. Depois de extrair a distribuição inicial ou fazer 
+<strong>checkout</strong> do git, você verá a seguinte estrutura de diretórios:</p>
+<pre><code class="lang-dir">$PHING_HOME
+  |-- bin
+  |-- classes
+  |    `-- phing
+  |         |-- filters
+  |         |    `-- util
+  |         |-- mappers
+  |         |-- parser
+  |         |-- tasks
+  |         |    |-- ext
+  |         |    |-- system
+  |         |    |    `-- condition
+  |         |    `-- user
+  |         `-- types
+  |-- docs
+  |    `-- phing_guide
+  `-- test
+       |-- classes
+       `-- etc
+</code></pre>
+<p>A tabela a seguir descreve resumidamente o conteúdo dos principais diretórios:</p>
+<p>Tabela 6.1: Estrutura de diretórios do Phing</p>
+<table>
+<thead>
+<tr>
+<th>Directory</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bin</td>
+<td>Aplicações básicas (phing, configuração) assim como scripts empacotados para plataformas distintas(atualmente Unix e Windows).</td>
+</tr>
+<tr>
+<td>classes</td>
+<td>Repositório de todas as classes utilizadas pelo Phing. Este é o diretório base que deveria estar no include_path do PHP. Neste diretório você encontrará o subdiretório phing/ com todas as classes relevantes para o Phing.</td>
+</tr>
+<tr>
+<td>docs</td>
+<td>Arquivos de documentação. Livros gerados, manuais online assim como a documentação da API gerada em PHPDoc.</td>
+</tr>
+<tr>
+<td>test</td>
+<td>Um conjunto de casos de teste para diferentes tarefas, mappers e tipos. Se você estiver desenvolvendo no git você deveria adicionar um caso de teste para cada implementação que você fizer o check in.</td>
+</tr>
+</tbody>
+</table>
+<p>Atualmente não há distinção entre os leiautes source e o build do Phing. O leiaute de diretórios mostra a árvore de diretórios 
+que contém alguns arquivos adicionais como a página do Phing. Mais tarde pode haver um arquivo de build para criar uma 
+estrutura de diretórios vazia do próprio Phing.</p>
+<h2 id="conven-es-de-nomenclatura">Convenções de nomenclatura</h2>
+<p>Existem algumas convenções de nomenclatura de arquivos utilizadas pelo Phing. Aqui está um breve resumo das convenções 
+básicas:</p>
+<ul>
+<li>Os nomes de arquivo devem ser compostos de exatamente dois elementos: nome e extensão;</li>
+<li>Escolha nomes descritivos porem curtos (devem ter menos de 31 caracteres);</li>
+<li>Os nomes não devem conter pontos.</li>
+<li>Arquivos contendo código PHP devem ter a extensão .php;</li>
+<li>Deve haver pelo menos uma classe por arquivo (métodos procedurais não são aceitos, utilize um arquivo separado para 
+eles), com exceção de classes &quot;inner&quot;-type / helpers que podem ser declaradas no mesmo arquivo que as classes 
+&quot;outer&quot;-type / principais;</li>
+<li>O arquivo deve ser nomeado exatamente igual ao nome da sua classe.</li>
+<li>Arquivos de build e conjuntos de regras de configuração devem ter a extensão .xml.</li>
+</ul>
+<h2 id="padr-es-de-c-digo">Padrões de código</h2>
+<p>Nós utilizamos os padrões de código PEAR. Nós usamos uma versão menos restrita destes padrões, mas nós insistimos que 
+novas contribuições tenham comentários <strong>PHPDoc</strong> e que façam declarações explícitas de variáveis e métodos 
+<strong>public/protected/private</strong>.  Se você tiver sugestões sobre melhorias para o código base do Phing, não hesite em nos contatar.</p>
+
+            <footer class="site-footer">
+                <p>A documentação original sobre essa página você encontra
+                    clicando <a href="https://www.phing.info/docs/stable/hlhtml/index.html#d5e1706" target="_blank">aqui</a>
+                </p>
+                <a href="../" class="btn-back">Página inicial</a>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
+            </footer>
+        </section>
+
+        
+    </body>
+</html>

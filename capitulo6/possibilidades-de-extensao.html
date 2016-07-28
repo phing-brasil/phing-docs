@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Phing-docs | Possibilidades de extensão</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+        
+        <link  rel="stylesheet" href="../styles/normalize.css" /><link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" /><link  rel="stylesheet" href="../styles/stylesheet.css" /><link  rel="stylesheet" href="../styles/github-light.css" />
+    </head>
+    <body>
+        <section class="page-header">
+            <h1 class="project-name">Possibilidades de extensão</h1>
+            <h2 class="project-tagline"></h2>
+            <a href="../" class="btn">Voltar</a>
+        </section>
+        <section class="main-content">
+            <p>Existem 3 áreas principais em que o Phing pode ser estendido: <strong>Tasks</strong>, tipos e <strong>mappers</strong>. As sessões a seguir discutem estas<br>opções.</p>
+<h2 id="-tasks-"><strong>Tasks</strong></h2>
+<p>Tasks são trechos de código que executam uma ação únicam, como instalar um arquivo. Portanto, uma classe <strong>worker</strong> a ser 
+criada e armazenada em um local específico, que implementa o trabalho. A classe <strong>worker</strong> é somente uma interface para o 
+Phing que deve cumprir alguns requisitos, que serão discutidos adiante nesse capítulo, contudo ela pode - mas não 
+necessariamente deve - usar outras classes, <strong>workers</strong> e bibliotecas que ajudam a executar as operações necessárias.</p>
+<h2 id="tipos">Tipos</h2>
+<p>Extender tipos é uma necessidade rara; Ainda assim, você pode fazê-lo. Um possível tipo que você pode implementar é uma<br><strong>urlset</strong>, por exemplo.</p>
+<p>Você pode acaber precisando de um novo tipo para uma <strong>task</strong> que você escreveu; por exemplo, se você estiver escrevendo o<br><strong>XSLTTask</strong> você pode descobrir que você vai precisar de um tipo especial para o <strong>XSLTParams</strong> (mesmo que nesse caso você 
+poderia usar o tipo de parâmetro genérico nome/valor). Em casos onde o tipo é realmente exclusivo de uma única tarefa, você 
+pode querer apenas definir a classe de tipo no mesmo arquivo que a classe <strong>Tasks</strong>, ao invés de criar um tipo oficial 
+<strong>stand-alone</strong>.</p>
+<h2 id="-mappers-"><strong>Mappers</strong></h2>
+<p>Criar novos <strong>mappers</strong> é também uma necessidade rara, uma vez que quase tudo pode ser manipulado pelos <strong>Core mappers</strong>. O 
+<strong>framework</strong> <strong>mapper</strong> provê um jeito simples para definir seus próprios <strong>mappers</strong> e eles implementam uma interface muito 
+simples.</p>
+
+            <footer class="site-footer">
+                <p>A documentação original sobre essa página você encontra
+                    clicando <a href="https://www.phing.info/docs/stable/hlhtml/index.html#d5e1687" target="_blank">aqui</a>
+                </p>
+                <a href="../" class="btn-back">Página inicial</a>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
+            </footer>
+        </section>
+
+        
+    </body>
+</html>

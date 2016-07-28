@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Phing-docs | Tipos básicos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+        
+        <link  rel="stylesheet" href="../styles/normalize.css" /><link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" /><link  rel="stylesheet" href="../styles/stylesheet.css" /><link  rel="stylesheet" href="../styles/github-light.css" />
+    </head>
+    <body>
+        <section class="page-header">
+            <h1 class="project-name">Tipos básicos</h1>
+            <h2 class="project-tagline"></h2>
+            <a href="../" class="btn">Voltar</a>
+        </section>
+        <section class="main-content">
+            <p>Essa seção introduz os tipos básicos utilizados no Phing</p>
+<h2 id="fileset">Fileset</h2>
+<p>Fileset são grupos de arquivos. Onde você pode incluir ou excluir arquivos específicos baseado em padrões. A seguir iremos explicar mais sobre padrões, mas por agora se atente ao código baixo:</p>
+<pre><code class="lang-xml">&lt;fileset dir=&quot;/tmp&quot; id=&quot;fileset1&quot;&gt;
+  &lt;include name=&quot;sometemp/file.txt&quot; /&gt;
+  &lt;include name=&quot;othertemp/**&quot; /&gt;
+  &lt;exclude name=&quot;othertemp/file.txt&quot; /&gt;
+&lt;/fileset&gt;
+
+&lt;fileset dir=&quot;/home&quot; id=&quot;fileset2&quot;&gt;
+  &lt;include name=&quot;foo/**&quot; /&gt;
+  &lt;include name=&quot;bar/**/*.php&quot; /&gt;
+  &lt;exclude name=&quot;foo/tmp/**&quot; /&gt;
+&lt;/fileset&gt;
+</code></pre>
+<p>A uilização de padrões é bem simples: Se você quer incluir uma parte do nome um arquivo ou o nome de um diretório use <code>*.</code>, como em nosso próximo exemplo incluímos todos os arquivos com a extensão <strong>.php</strong></p>
+<pre><code class="lang-xml">&lt;fileset dir=&quot;/tmp&quot; id=&quot;fileset1&quot;&gt;
+  &lt;include name=&quot;bar/**/*.php&quot; /&gt;
+&lt;/fileset&gt;
+</code></pre>
+<p>Se você quer incluir múltiplos diretórios e/ou arquivos use <code>**</code>. Dessa forma Filesets fornece uma maneira poderosa de manipular arquivos com Phing</p>
+<h2 id="filelist">Filelist</h2>
+<p>Como Fileset, Filelist são coleções de arquivos, entretanto, Filelist é uma lista definida de arquivos (e os arquivos não precisam efetivamente existir no sistema operacional).</p>
+<p>Além de permitir referenciar arquivos não existentes, Filelist nos permite especificar os arquivos em uma determinada ordem. Arquivos em Filset são ordenados pelo sistema operacional, e em alguns casos você vai querer especificar uma lista de arquivos para serem processados em uma determinada ordem</p>
+<pre><code class="lang-xml">&lt;filelist dir=&quot;base/&quot; files=&quot;file1.txt,file2.txt,file3.txt&quot;/&gt;
+
+&lt;!-- OR: --&gt;
+&lt;filelist dir=&quot;basedir/&quot; listfile=&quot;files_to_process.txt&quot;/&gt;
+</code></pre>
+
+            <footer class="site-footer">
+                <p>A documentação original sobre essa página você encontra
+                    clicando <a href="https://www.phing.info/docs/stable/hlhtml/index.html#d5e1175" target="_blank">aqui</a>
+                </p>
+                <a href="../" class="btn-back">Página inicial</a>
+                <span class="site-footer-owner"><a href="https://github.com/phing-brasil/phing-docs">Phing-docs</a> é mantida por <a href="https://github.com/phing-brasil">phing-brasil</a>.</span>
+            </footer>
+        </section>
+
+        
+    </body>
+</html>
